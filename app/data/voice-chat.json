@@ -1,0 +1,53 @@
+[
+  {
+    "id": "v1",
+    "sender": "lead",
+    "text": "Necesito reprogramar mi cita del martes.",
+    "time": "14:20 PM",
+    "delay": 1000
+  },
+  {
+    "id": "v2",
+    "sender": "agent",
+    "type": "processing",
+    "delay": 800
+  },
+  {
+    "id": "v3",
+    "sender": "agent",
+    "text": "Entendido. Veo un hueco disponible el miércoles a las 10:00 AM. ¿Te sirve?",
+    "time": "14:20 PM",
+    "delay": 1500
+  },
+  {
+    "id": "v4",
+    "sender": "lead",
+    "text": "Sí, perfecto. ¿Me llegará confirmación?",
+    "time": "14:21 PM",
+    "delay": 2000
+  },
+  {
+    "id": "v5",
+    "sender": "agent",
+    "type": "processing",
+    "delay": 600
+  },
+  {
+    "id": "v6",
+    "sender": "agent",
+    "text": "Así es, te acabo de enviar un correo con los detalles. ¡Nos vemos!",
+    "time": "14:21 PM",
+    "delay": 1500
+  },
+  {
+    "id": "v7",
+    "sender": "agent",
+    "type": "action",
+    "icon": "mail-check",
+    "text": "Confirmación enviada a juan@empresa.com",
+    "delay": 800
+  }
+]
+
+
+

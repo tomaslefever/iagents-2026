@@ -1,0 +1,35 @@
+[
+  {
+    "id": "msg-1",
+    "sender": "lead",
+    "text": "Hola, estoy interesado en el plan Enterprise. ¿Qué incluye?",
+    "time": "10:42 AM",
+    "delay": 800
+  },
+  {
+    "id": "processing-1",
+    "type": "processing",
+    "sender": "agent",
+    "delay": 1500
+  },
+  {
+    "id": "msg-2",
+    "sender": "agent",
+    "text": "¡Hola Carlos! Nuestro plan Enterprise incluye soporte dedicado, SSO y audit logs. ¿Te gustaría agendar una demo técnica?",
+    "time": "10:42 AM",
+    "delay": 1500
+  },
+  {
+    "id": "msg-3",
+    "sender": "lead",
+    "text": "Sí, por favor. ¿Tienen disponibilidad mañana por la tarde?",
+    "time": "10:43 AM",
+    "delay": 2500
+  },
+  {
+    "id": "processing-2",
+    "type": "processing",
+    "sender": "agent",
+    "delay": 1000
+  }
+]

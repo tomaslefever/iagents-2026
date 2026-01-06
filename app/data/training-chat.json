@@ -1,0 +1,59 @@
+[
+  {
+    "id": "t-msg-1",
+    "sender": "lead",
+    "text": "Cuando el cliente pregunte por integraciones, menciona HubSpot y Salesforce prioritariamente.",
+    "time": "En línea",
+    "delay": 500
+  },
+  {
+    "id": "t-proc-1",
+    "type": "processing",
+    "sender": "agent",
+    "delay": 1000
+  },
+  {
+    "id": "t-action-1",
+    "type": "action",
+    "text": "Nueva regla de conocimiento añadida",
+    "icon": "brain-circuit",
+    "delay": 1500
+  },
+  {
+    "id": "t-msg-2",
+    "sender": "agent",
+    "text": "Entendido. He actualizado mi contexto. Simulando escenario de prueba...",
+    "time": "Ahora",
+    "delay": 1500
+  },
+  {
+    "id": "t-msg-3",
+    "sender": "lead",
+    "text": "(Simulado) ¿Tienen integración con mi CRM actual?",
+    "time": "Ahora",
+    "delay": 2000
+  },
+  {
+    "id": "t-proc-2",
+    "type": "processing",
+    "sender": "agent",
+    "delay": 1000
+  },
+  {
+    "id": "t-msg-4",
+    "sender": "agent",
+    "text": "Sí, contamos con integraciones nativas bidireccionales para HubSpot y Salesforce.",
+    "time": "Ahora",
+    "delay": 1000
+  },
+  {
+    "id": "t-action-2",
+    "type": "action",
+    "text": "Test de regla exitoso",
+    "icon": "check-circle",
+    "delay": 500
+  }
+]
+
+
+

@@ -1,0 +1,579 @@
+<html lang="es" class="dark"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentia Automotive - Automatización para Automotoras</title>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+darkMode: 'class',
+theme: {
+extend: {
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+mono: ['JetBrains Mono', 'monospace'],
+},
+colors: {
+zinc: {
+850: '#1f1f22',
+900: '#18181b',
+950: '#09090b',
+},
+emerald: { // Accent color for Real Estate (Growth/Sales)
+450: '#34d399',
+550: '#10b981',
+}
+},
+animation: {
+'fade-in': 'fadeIn 0.8s ease-out forwards',
+'float': 'float 6s ease-in-out infinite',
+'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+},
+keyframes: {
+fadeIn: {
+'0%': { opacity: '0', transform: 'translateY(10px)' },
+'100%': { opacity: '1', transform: 'translateY(0)' },
+},
+float: {
+'0%, 100%': { transform: 'translateY(0)' },
+'50%': { transform: 'translateY(-10px)' },
+},
+}
+}
+}
+}
+</script>
+<!-- Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+.custom-scroll::-webkit-scrollbar {
+width: 4px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+background: transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+background-color: #3f3f46;
+border-radius: 20px;
+}
+.grid-bg {
+background-size: 40px 40px;
+background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+.glass-card {
+background: rgba(24, 24, 27, 0.7);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.gradient-text {
+background: linear-gradient(to right, #ffffff, #a1a1aa);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+/* Chat Bubble Animations */
+.chat-bubble {
+opacity: 0;
+animation: slideIn 0.5s ease-out forwards;
+}
+@keyframes slideIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+</style></head>
+  <body class="bg-zinc-950 text-zinc-300 font-sans min-h-screen flex flex-col items-center overflow-x-hidden selection:bg-red-500/30">
+    <!-- Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      <div class="absolute -top-[10%] left-[20%] w-[800px] h-[800px] rounded-full blur-[100px] opacity-20 bg-red-500/5"></div>
+      <div class="absolute bottom-[0%] right-[0%] w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[100px] opacity-10"></div>
+      <div class="absolute inset-0 grid-bg opacity-40"></div>
+    </div>
+
+    <!-- Wrapper -->
+    <div class="w-full max-w-[1200px] flex flex-col relative z-10 px-6">
+      <!-- Navbar -->
+      <header class="flex items-center justify-between py-6 animate-fade-in">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-red-700 rounded flex items-center justify-center shadow-lg shadow-red-900/20">
+            <i data-lucide="car-front" class="w-4 h-4 text-white stroke-[2.5px]"></i>
+          </div>
+          <span class="font-semibold tracking-tight text-white text-sm">
+            Agentia
+            <span class="text-zinc-500 font-normal">Automotive</span>
+          </span>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-8 text-xs font-medium text-zinc-400">
+          <a href="#" class="hover:text-white transition-colors">
+            Stock Inteligente
+          </a>
+          <a href="#" class="hover:text-white transition-colors">
+            Integraciones
+          </a>
+          <a href="#" class="hover:text-white transition-colors">
+            Casos de Éxito
+          </a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+          <button class="text-xs font-medium text-zinc-400 hover:text-white transition-colors hidden sm:block">
+            Login
+          </button>
+          <button class="bg-white text-zinc-950 text-xs px-4 py-2 rounded-full font-semibold hover:bg-zinc-200 transition-colors shadow-lg shadow-white/5">
+            Agendar Demo
+          </button>
+        </div>
+      </header>
+
+      <!-- Hero Section -->
+      <main class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center py-16 lg:py-24">
+        <!-- Hero Content -->
+        <div class="flex flex-col animate-fade-in">
+          <div class="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-red-400 text-[10px] mb-8 uppercase tracking-widest font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+            Disponible 24/7 en WhatsApp &amp; Voz
+          </div>
+
+          <h1 class="font-medium text-4xl lg:text-6xl text-white tracking-tight leading-[1.1] mb-6">
+            Vende más autos y agenda Test Drives
+            <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">
+              en piloto automático.
+            </span>
+          </h1>
+
+          <p class="text-sm text-zinc-400 leading-relaxed mb-8 max-w-lg">
+            Tus vendedores pierden horas respondiendo "¿Precio?" en Marketplace
+            y Chileautos. Agentia califica leads, filtra curiosos y agenda
+            visitas al concesionario solo con clientes reales.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <button class="flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3.5 rounded-lg text-xs font-bold hover:bg-red-500 transition-all shadow-lg shadow-red-600/20 w-full sm:w-auto">
+              <span>Probar Demo WhatsApp</span>
+              <i data-lucide="message-circle" class="w-4 h-4"></i>
+            </button>
+            <div class="flex items-center gap-2 px-4 py-2">
+              <div class="flex -space-x-2">
+                <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&amp;fit=crop&amp;w=100&amp;h=100&amp;q=80" class="w-8 h-8 rounded-full border-2 border-zinc-950 object-cover" alt="Gerente">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&amp;fit=crop&amp;w=100&amp;h=100&amp;q=80" class="w-8 h-8 rounded-full border-2 border-zinc-950 object-cover" alt="Vendedor">
+                <div class="w-8 h-8 rounded-full border-2 border-zinc-950 bg-zinc-800 flex items-center justify-center text-[10px] text-white">
+                  +500
+                </div>
+              </div>
+              <div class="text-[10px] text-zinc-500 leading-tight">
+                <span class="text-white font-medium block">
+                  Automotoras líderes
+                </span>
+                usando Agentia
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual: Automated Flow -->
+        <div class="relative lg:h-[600px] flex items-center justify-center animate-fade-in" style="animation-delay: 0.2s">
+          <!-- Decorative blurred circle -->
+          <div class="absolute inset-0 bg-red-600/10 blur-3xl rounded-full scale-75 opacity-50 pointer-events-none"></div>
+
+          <!-- Phone/Interface Container -->
+          <div class="relative w-[320px] bg-zinc-950 rounded-[3rem] border-4 border-zinc-900 shadow-2xl overflow-hidden animate-float">
+            <!-- Status Bar -->
+            <div class="h-6 bg-zinc-950 w-full flex items-center justify-between px-6 pt-2">
+              <span class="text-[10px] text-white font-medium">14:20</span>
+              <div class="flex gap-1">
+                <div class="w-3 h-3 text-white">
+                  <i data-lucide="wifi" class="w-3 h-3"></i>
+                </div>
+                <div class="w-3 h-3 text-white">
+                  <i data-lucide="battery" class="w-3 h-3"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chat Header -->
+            <div class="bg-zinc-900/80 backdrop-blur p-4 flex items-center gap-3 border-b border-white/5">
+              <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
+                <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+              </div>
+              <div>
+                <div class="text-xs font-medium text-white">
+                  Agente Mazda IA
+                </div>
+                <div class="text-[9px] text-red-400">
+                  En línea • Ventas Nuevos
+                </div>
+              </div>
+            </div>
+
+            <!-- Chat Body -->
+            <div class="p-4 flex flex-col gap-3 h-[400px] bg-zinc-950 overflow-hidden relative">
+              <div class="absolute inset-0 opacity-20" style="background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');"></div>
+
+              <!-- Messages -->
+              <div class="self-end max-w-[85%] bg-red-600 rounded-2xl rounded-tr-sm p-3 shadow-sm z-10 chat-bubble" style="animation-delay: 0.5s">
+                <p class="text-[11px] text-white leading-relaxed">
+                  Hola, vi el CX-5 en Facebook. ¿Precio y disponibilidad?
+                </p>
+                <span class="text-[9px] text-red-200 block text-right mt-1">
+                  14:20 PM
+                </span>
+              </div>
+
+              <div class="self-start max-w-[85%] bg-zinc-800 rounded-2xl rounded-tl-sm p-3 border border-zinc-700 z-10 chat-bubble" style="animation-delay: 1.5s">
+                <p class="text-[11px] text-zinc-200 leading-relaxed">
+                  ¡Hola! 🚗 El New CX-5 2024 está desde $22.990.000. Tenemos
+                  stock en color Soul Red. ¿Tienes auto en parte de pago?
+                </p>
+                <span class="text-[9px] text-zinc-500 block text-right mt-1">
+                  14:20 PM
+                </span>
+              </div>
+
+              <div class="self-end max-w-[85%] bg-red-600 rounded-2xl rounded-tr-sm p-3 shadow-sm z-10 chat-bubble" style="animation-delay: 2.8s">
+                <p class="text-[11px] text-white leading-relaxed">
+                  Sí, tengo un Suzuki Swift 2019.
+                </p>
+                <span class="text-[9px] text-red-200 block text-right mt-1">
+                  14:21 PM
+                </span>
+              </div>
+
+              <div class="self-start max-w-[85%] bg-zinc-800 rounded-2xl rounded-tl-sm p-3 border border-zinc-700 z-10 chat-bubble" style="animation-delay: 4.0s">
+                <p class="text-[11px] text-zinc-200 leading-relaxed">
+                  Excelente, podemos tasarlo en línea. ¿Te gustaría agendar un
+                  Test Drive para este Viernes?
+                </p>
+                <!-- Suggestion Chips -->
+                <div class="flex gap-2 mt-2">
+                  <button class="px-2 py-1 rounded bg-zinc-700 text-[10px] text-red-400 hover:bg-zinc-600">
+                    Sí, agendar
+                  </button>
+                  <button class="px-2 py-1 rounded bg-zinc-700 text-[10px] text-zinc-300 hover:bg-zinc-600">
+                    Cotizar crédito
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-3 bg-zinc-900 border-t border-white/5 flex items-center gap-2">
+              <div class="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-500">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+              </div>
+              <div class="flex-1 h-8 bg-zinc-950 rounded-full border border-zinc-800 px-3 flex items-center text-[10px] text-zinc-500">
+                Escribe un mensaje...
+              </div>
+              <div class="w-6 h-6 text-red-500">
+                <i data-lucide="send" class="w-4 h-4"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Notification Card -->
+          <div class="absolute bottom-20 -right-4 lg:-right-12 glass-card p-4 rounded-xl flex items-center gap-3 animate-pulse-slow shadow-xl max-w-[220px]">
+            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-500 shrink-0">
+              <i data-lucide="key" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <div class="text-xs font-medium text-white">
+                Test Drive Agendado
+              </div>
+              <div class="text-[10px] text-zinc-400">
+                Viernes, 11:00 AM • Sucursal Las Condes
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Logos Section -->
+      <section class="border-y border-white/5 py-8">
+        <p class="text-center text-[10px] uppercase tracking-widest text-zinc-600 mb-6 font-medium">
+          Confían en nosotros
+        </p>
+        <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+          <div class="flex items-center gap-2 font-bold text-lg text-white">
+            <i data-lucide="circle-dot" class="w-5 h-5"></i>
+            TOYOTA
+          </div>
+          <div class="flex items-center gap-2 font-bold text-lg text-white">
+            <i data-lucide="zap" class="w-5 h-5"></i>
+            CHEVROLET
+          </div>
+          <div class="flex items-center gap-2 font-bold text-lg text-white">
+            <i data-lucide="disc" class="w-5 h-5"></i>
+            BMW
+          </div>
+          <div class="flex items-center gap-2 font-bold text-lg text-white">
+            <i data-lucide="search" class="w-5 h-5"></i>
+            CHILE
+            <span class="text-[10px] font-normal opacity-50">AUTOS</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature Section: Human Touch + Efficiency -->
+      <section class="py-20">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <!-- Image Placeholder: Human Aspect -->
+          <div class="relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-red-500 to-orange-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+            <div class="relative rounded-2xl overflow-hidden border border-white/10 aspect-[4/3]">
+              <img src="https://images.unsplash.com/photo-1560252829-804f1aedf1be?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Car Salesperson" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-700 ease-out">
+              <!-- Overlay Info -->
+              <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent">
+                <div class="flex items-center gap-4">
+                  <div class="bg-white/10 backdrop-blur-md border border-white/20 p-3 rounded-lg text-center min-w-[70px]">
+                    <div class="text-xl font-bold text-white">28</div>
+                    <div class="text-[9px] text-zinc-300 uppercase tracking-wider">
+                      Test Drives
+                    </div>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-medium text-sm">Esta Semana</h4>
+                    <p class="text-xs text-zinc-400">
+                      Generados automáticamente.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Copy -->
+          <div>
+            <h2 class="text-2xl md:text-3xl font-medium text-white mb-6 tracking-tight">
+              Vendedores cerrando ventas,
+              <br>
+              <span class="text-zinc-500">
+                no contestando preguntas obvias.
+              </span>
+            </h2>
+            <p class="text-sm text-zinc-400 mb-8 leading-relaxed">
+              Un vendedor pasa el 70% de su tiempo respondiendo sobre
+              disponibilidad, colores y requisitos de crédito. Agentia entrega
+              la ficha técnica y filtra si el cliente tiene Dicom o pie inicial.
+            </p>
+            <p class="text-sm text-zinc-400 mb-8 leading-relaxed">
+              Cuando el cliente llega a la sucursal, ya sabe qué modelo quiere y
+              cómo lo va a pagar.
+              <span class="text-white font-medium">
+                Tu equipo se dedica a entregar las llaves.
+              </span>
+            </p>
+
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center mt-0.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-red-500"></i>
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-white">
+                    Respuesta Inmediata a Leads
+                  </h4>
+                  <p class="text-[11px] text-zinc-500 mt-1">
+                    Envía fichas técnicas, videos del auto y ubicación en el
+                    segundo que preguntan en Facebook o Portal.
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center mt-0.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-red-500"></i>
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-white">
+                    Reactivación de Clientes (Taller)
+                  </h4>
+                  <p class="text-[11px] text-zinc-500 mt-1">
+                    Llama a clientes antiguos para ofrecer renovación ("Renueva
+                    tu auto") o agendar mantención.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Grid -->
+      <section class="py-16">
+        <div class="text-center mb-16">
+          <h2 class="text-2xl font-medium text-white mb-3">
+            Motor de ventas para tu automotora
+          </h2>
+          <p class="text-sm text-zinc-400">
+            Herramientas diseñadas para la industria automotriz.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Feature 1 -->
+          <div class="glass-card p-6 rounded-xl hover:border-red-500/30 transition-colors group">
+            <i data-lucide="message-square" class="w-8 h-8 text-red-500 mb-4 group-hover:scale-110 transition-transform"></i>
+            <h3 class="text-white text-sm font-semibold mb-2">Omnicanalidad</h3>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              Centraliza consultas de Chileautos, Facebook Marketplace,
+              Instagram y tu Web en un solo número de WhatsApp.
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="glass-card p-6 rounded-xl hover:border-orange-500/30 transition-colors group">
+            <i data-lucide="phone-call" class="w-8 h-8 text-orange-500 mb-4 group-hover:scale-110 transition-transform"></i>
+            <h3 class="text-white text-sm font-semibold mb-2">
+              Agente de Agendamiento
+            </h3>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              Coordina horas para taller o Test Drive automáticamente,
+              sincronizando con la disponibilidad de tus mecánicos o vendedores.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="glass-card p-6 rounded-xl hover:border-blue-500/30 transition-colors group">
+            <i data-lucide="database" class="w-8 h-8 text-blue-500 mb-4 group-hover:scale-110 transition-transform"></i>
+            <h3 class="text-white text-sm font-semibold mb-2">
+              Integración DMS/CRM
+            </h3>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              Conectamos con Pilot, Salesforce o Hubspot para crear la
+              oportunidad de venta y registrar cada interacción.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Before/After Comparison Visual -->
+      <section class="py-16 border-t border-white/5">
+        <div class="grid lg:grid-cols-2 gap-8 bg-zinc-900/50 rounded-2xl border border-white/5 overflow-hidden">
+          <!-- Left: Traditional Way -->
+          <div class="p-8 border-r border-white/5 relative overflow-hidden">
+            <div class="absolute top-4 right-4 text-[10px] uppercase font-bold text-red-500 tracking-wider">
+              Antes
+            </div>
+            <h3 class="text-white font-medium mb-6">Venta Tradicional</h3>
+            <div class="space-y-4 opacity-50">
+              <div class="flex items-center gap-3 text-xs text-zinc-400">
+                <i data-lucide="x-circle" class="w-4 h-4 text-red-500"></i>
+                <span>Leads perdidos por demora</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs text-zinc-400">
+                <i data-lucide="x-circle" class="w-4 h-4 text-red-500"></i>
+                <span>Vendedores filtrando "curiosos"</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs text-zinc-400">
+                <i data-lucide="x-circle" class="w-4 h-4 text-red-500"></i>
+                <span>Sin seguimiento de retomadas</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs text-zinc-400">
+                <i data-lucide="x-circle" class="w-4 h-4 text-red-500"></i>
+                <span>Excel desactualizado</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: AI Way -->
+          <div class="p-8 relative overflow-hidden bg-red-900/5">
+            <div class="absolute top-4 right-4 text-[10px] uppercase font-bold text-red-500 tracking-wider">
+              Con Agentia
+            </div>
+            <h3 class="text-white font-medium mb-6">Venta Digital</h3>
+            <div class="space-y-4">
+              <div class="flex items-center gap-3 text-xs text-white">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-red-500"></i>
+                <span>Respuesta inmediata 24/7</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs text-white">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-red-500"></i>
+                <span>Pre-evaluación de retoma y crédito</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs text-white">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-red-500"></i>
+                <span>Agendamiento automático en sala</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs text-white">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-red-500"></i>
+                <span>Sync directo a tu CRM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Second Image / CTA Section -->
+      <section class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-zinc-950/80 z-10 pointer-events-none"></div>
+        <div class="relative rounded-2xl overflow-hidden border border-white/10 h-[400px]">
+          <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" alt="Luxury Car Interior" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-black/60 z-10 flex flex-col items-center justify-center text-center p-6">
+            <h2 class="text-3xl font-medium text-white mb-4">
+              Acelera tus ventas hoy.
+            </h2>
+            <p class="text-sm text-zinc-300 max-w-md mb-8">
+              Implementación en 48 horas. Carga tu stock, conecta tu WhatsApp y
+              empieza a recibir visitas calificadas.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 w-full max-w-md">
+              <input type="email" placeholder="gerencia@automotora.cl" class="bg-white/10 border border-white/20 rounded px-4 py-3 text-xs text-white placeholder-zinc-400 focus:outline-none focus:border-red-500 flex-1 backdrop-blur-sm">
+              <button class="bg-red-600 text-white px-6 py-3 rounded font-bold text-xs hover:bg-red-500 transition-colors whitespace-nowrap">
+                Solicitar Acceso
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="py-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-zinc-500">
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2">
+            <div class="w-4 h-4 bg-zinc-800 rounded flex items-center justify-center">
+              <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+            </div>
+            <span class="text-zinc-300 font-medium">Agentia Automotive</span>
+          </div>
+          <p>© 2024 Agentia Technologies. Santiago, Chile.</p>
+        </div>
+
+        <div class="flex gap-8">
+          <div class="flex flex-col gap-2">
+            <span class="text-white font-medium mb-1">Producto</span>
+            <a href="#" class="hover:text-red-400 transition-colors">
+              WhatsApp AI
+            </a>
+            <a href="#" class="hover:text-red-400 transition-colors">
+              Voice Agents
+            </a>
+          </div>
+          <div class="flex flex-col gap-2">
+            <span class="text-white font-medium mb-1">Compañía</span>
+            <a href="#" class="hover:text-red-400 transition-colors">
+              Sobre Nosotros
+            </a>
+            <a href="#" class="hover:text-red-400 transition-colors">
+              Contacto
+            </a>
+          </div>
+          <div class="flex flex-col gap-2">
+            <span class="text-white font-medium mb-1">Legal</span>
+            <a href="#" class="hover:text-red-400 transition-colors">
+              Privacidad
+            </a>
+            <a href="#" class="hover:text-red-400 transition-colors">
+              Términos
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      lucide.createIcons();
+    </script>
+  
+</body></html>

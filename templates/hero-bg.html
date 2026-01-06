@@ -1,0 +1,1154 @@
+<html lang="es" class="dark"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentia - CRM &amp; Agentes IA</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+      darkMode: 'class',
+      theme: {
+      extend: {
+      fontFamily: {
+      sans: ['Inter', 'sans-serif'],
+      mono: ['JetBrains Mono', 'monospace'],
+      },
+      colors: {
+      zinc: {
+      850: '#1f1f22',
+      900: '#18181b',
+      950: '#09090b',
+      }
+      },
+      animation: {
+      'blur-in': 'blurIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+      'float': 'float 8s ease-in-out infinite',
+      'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      'slide-up': 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+      },
+      keyframes: {
+      blurIn: {
+      '0%': { filter: 'blur(10px)', opacity: '0', transform: 'translateY(10px)' },
+      '100%': { filter: 'blur(0)', opacity: '1', transform: 'translateY(0)' },
+      },
+      float: {
+      '0%, 100%': { transform: 'translateY(0)' },
+      '50%': { transform: 'translateY(-10px)' },
+      },
+      slideUp: {
+      '0%': { transform: 'translateY(20px)', opacity: '0' },
+      '100%': { transform: 'translateY(0)', opacity: '1' },
+      }
+      }
+      }
+      }
+      }
+    </script>
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+      }
+      .custom-scroll::-webkit-scrollbar-track {
+      background: transparent;
+      }
+      .custom-scroll::-webkit-scrollbar-thumb {
+      background-color: #3f3f46;
+      border-radius: 20px;
+      }
+      .grid-bg {
+      background-size: 40px 40px;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      }
+      .glass-panel {
+      background: rgba(24, 24, 27, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .cal-grid {
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 40px;
+      }
+      /* Ensure dropdown stays open when moving mouse */
+      .group:hover .group-hover\:visible {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="bg-zinc-950 text-zinc-300 font-sans min-h-screen flex flex-col items-center p-4 lg:p-6 selection:bg-indigo-500/30 overflow-x-hidden">
+    <!-- Background Ambience -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      <div data-us-project="ILgOO23w4wEyPQOKyLO4" class="absolute inset-0 w-full h-full"></div>
+      <div class="absolute inset-0 grid-bg opacity-40"></div>
+      <script>
+        !function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head || document.body).appendChild(i)}}();
+      </script>
+    </div>
+
+    <!-- Container Wrapper -->
+    <div class="w-full max-w-[1100px] flex flex-col gap-6 relative z-10 animate-blur-in">
+      <!-- Navbar with Mega Menu -->
+      <header class="flex items-center justify-between py-4 relative z-50">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 bg-zinc-100 rounded-sm flex items-center justify-center">
+            <div class="w-2 h-2 bg-zinc-900 rounded-full"></div>
+          </div>
+          <span class="font-medium tracking-tight text-white text-sm">
+            AGENTIA
+          </span>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-1 text-xs font-medium text-zinc-500">
+          <!-- Menu Item: Productos -->
+          <div class="group relative px-3 py-2">
+            <button class="flex items-center gap-1 hover:text-white transition-colors focus:outline-none">
+              Productos
+              <i data-lucide="chevron-down" class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180"></i>
+            </button>
+
+            <!-- Dropdown Panel -->
+            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[320px] opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+              <div class="bg-zinc-900/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl p-2 overflow-hidden ring-1 ring-white/5">
+                <div class="flex flex-col gap-1">
+                  <!-- CRM -->
+                  <a href="#" class="flex items-start gap-3 p-3 rounded-lg hover:bg-zinc-800/50 transition-colors group/item">
+                    <div class="w-8 h-8 rounded-md bg-zinc-800/50 border border-white/5 flex items-center justify-center shrink-0 group-hover/item:border-indigo-500/30 group-hover/item:bg-indigo-500/10 transition-colors">
+                      <i data-lucide="layout-list" class="w-4 h-4 text-zinc-400 group-hover/item:text-indigo-400"></i>
+                    </div>
+                    <div>
+                      <div class="text-zinc-200 font-medium mb-0.5 group-hover/item:text-white">
+                        CRM
+                      </div>
+                      <p class="text-[10px] text-zinc-500 leading-snug">
+                        Pipeline inteligente y gestión de contactos.
+                      </p>
+                    </div>
+                  </a>
+
+                  <!-- MCP -->
+                  <a href="#" class="flex items-start gap-3 p-3 rounded-lg hover:bg-zinc-800/50 transition-colors group/item">
+                    <div class="w-8 h-8 rounded-md bg-zinc-800/50 border border-white/5 flex items-center justify-center shrink-0 group-hover/item:border-purple-500/30 group-hover/item:bg-purple-500/10 transition-colors">
+                      <i data-lucide="cpu" class="w-4 h-4 text-zinc-400 group-hover/item:text-purple-400"></i>
+                    </div>
+                    <div>
+                      <div class="text-zinc-200 font-medium mb-0.5 group-hover/item:text-white">
+                        MCP
+                      </div>
+                      <p class="text-[10px] text-zinc-500 leading-snug">
+                        Model Context Protocol para lógica custom.
+                      </p>
+                    </div>
+                  </a>
+
+                  <!-- Agentes -->
+                  <a href="#" class="flex items-start gap-3 p-3 rounded-lg hover:bg-zinc-800/50 transition-colors group/item">
+                    <div class="w-8 h-8 rounded-md bg-zinc-800/50 border border-white/5 flex items-center justify-center shrink-0 group-hover/item:border-blue-500/30 group-hover/item:bg-blue-500/10 transition-colors">
+                      <i data-lucide="bot" class="w-4 h-4 text-zinc-400 group-hover/item:text-blue-400"></i>
+                    </div>
+                    <div>
+                      <div class="text-zinc-200 font-medium mb-0.5 group-hover/item:text-white">
+                        Agentes
+                      </div>
+                      <p class="text-[10px] text-zinc-500 leading-snug">
+                        Bots autónomos de voz y texto.
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Menu Item: Soluciones -->
+          <div class="group relative px-3 py-2">
+            <button class="flex items-center gap-1 hover:text-white transition-colors focus:outline-none">
+              Soluciones
+              <i data-lucide="chevron-down" class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180"></i>
+            </button>
+
+            <!-- Dropdown Panel -->
+            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[480px] opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+              <div class="bg-zinc-900/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl p-2 overflow-hidden ring-1 ring-white/5 grid grid-cols-2 gap-1">
+                <!-- Inmobiliarias -->
+                <a href="#" class="flex items-start gap-3 p-3 rounded-lg hover:bg-zinc-800/50 transition-colors group/item">
+                  <div class="w-8 h-8 rounded-md bg-zinc-800/50 border border-white/5 flex items-center justify-center shrink-0 group-hover/item:border-orange-500/30 group-hover/item:bg-orange-500/10 transition-colors">
+                    <i data-lucide="building" class="w-4 h-4 text-zinc-400 group-hover/item:text-orange-400"></i>
+                  </div>
+                  <div>
+                    <div class="text-zinc-200 font-medium mb-0.5 group-hover/item:text-white">
+                      Inmobiliarias
+                    </div>
+                    <p class="text-[10px] text-zinc-500 leading-snug">
+                      Agendamiento de visitas automático.
+                    </p>
+                  </div>
+                </a>
+
+                <!-- Salud -->
+                <a href="#" class="flex items-start gap-3 p-3 rounded-lg hover:bg-zinc-800/50 transition-colors group/item">
+                  <div class="w-8 h-8 rounded-md bg-zinc-800/50 border border-white/5 flex items-center justify-center shrink-0 group-hover/item:border-rose-500/30 group-hover/item:bg-rose-500/10 transition-colors">
+                    <i data-lucide="activity" class="w-4 h-4 text-zinc-400 group-hover/item:text-rose-400"></i>
+                  </div>
+                  <div>
+                    <div class="text-zinc-200 font-medium mb-0.5 group-hover/item:text-white">
+                      Salud
+                    </div>
+                    <p class="text-[10px] text-zinc-500 leading-snug">
+                      Gestión de pacientes y citas médicas.
+                    </p>
+                  </div>
+                </a>
+
+                <!-- Educación -->
+                <a href="#" class="flex items-start gap-3 p-3 rounded-lg hover:bg-zinc-800/50 transition-colors group/item">
+                  <div class="w-8 h-8 rounded-md bg-zinc-800/50 border border-white/5 flex items-center justify-center shrink-0 group-hover/item:border-yellow-500/30 group-hover/item:bg-yellow-500/10 transition-colors">
+                    <i data-lucide="graduation-cap" class="w-4 h-4 text-zinc-400 group-hover/item:text-yellow-400"></i>
+                  </div>
+                  <div>
+                    <div class="text-zinc-200 font-medium mb-0.5 group-hover/item:text-white">
+                      Educación
+                    </div>
+                    <p class="text-[10px] text-zinc-500 leading-snug">
+                      Captación de alumnos y coaching.
+                    </p>
+                  </div>
+                </a>
+
+                <!-- Uso Interno -->
+                <a href="#" class="flex items-start gap-3 p-3 rounded-lg hover:bg-zinc-800/50 transition-colors group/item">
+                  <div class="w-8 h-8 rounded-md bg-zinc-800/50 border border-white/5 flex items-center justify-center shrink-0 group-hover/item:border-green-500/30 group-hover/item:bg-green-500/10 transition-colors">
+                    <i data-lucide="lock" class="w-4 h-4 text-zinc-400 group-hover/item:text-green-400"></i>
+                  </div>
+                  <div>
+                    <div class="text-zinc-200 font-medium mb-0.5 group-hover/item:text-white">
+                      Uso Interno
+                    </div>
+                    <p class="text-[10px] text-zinc-500 leading-snug">
+                      Automatización de procesos HR/IT.
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <a href="#" class="px-3 py-2 hover:text-white transition-colors">
+            Integraciones
+          </a>
+          <a href="#" class="px-3 py-2 hover:text-white transition-colors">
+            Enterprise
+          </a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <button class="text-xs font-medium text-zinc-400 hover:text-white transition-colors">
+            Log in
+          </button>
+          <button class="bg-white text-zinc-950 text-xs px-3 py-1.5 rounded font-medium hover:bg-zinc-200 transition-colors">
+            Empezar
+          </button>
+        </div>
+      </header>
+
+      <!-- Section 1: Hero & Live Conversation -->
+      <main class="grid lg:grid-cols-12 gap-6 lg:gap-12 items-center py-10 lg:py-16 relative z-10">
+        <!-- Hero Copy -->
+        <div class="lg:col-span-5 flex flex-col justify-center">
+          <div class="inline-flex items-center gap-2 self-start px-2 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] mb-6 uppercase tracking-widest font-semibold">
+            <span class="relative flex h-1.5 w-1.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-indigo-500"></span>
+            </span>
+            Agentia AI v2.0
+          </div>
+
+          <h1 class="font-medium text-4xl lg:text-5xl text-white tracking-tight leading-[1.1] mb-6">
+            Tus leads atendidos
+            <br>
+            <span class="text-zinc-500">automáticamente.</span>
+          </h1>
+
+          <p class="text-sm text-zinc-400 leading-relaxed mb-8 max-w-md">
+            Agentes inteligentes que califican leads, agendan citas y
+            sincronizan datos con tu CRM 24/7. Reduce costos operativos y
+            aumenta la conversión sin intervención humana.
+          </p>
+
+          <div class="flex items-center gap-3">
+            <button class="flex items-center justify-center gap-2 bg-white text-zinc-950 px-5 py-2.5 rounded-md text-xs font-medium hover:bg-zinc-200 transition-all shadow-lg shadow-white/5">
+              <span>Ver Demo Interactiva</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+            <div class="flex items-center gap-2 px-4 py-2 text-xs text-zinc-500">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-zinc-600"></i>
+              <span>Setup en 5 min</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual: Conversation & Logic -->
+        <div class="lg:col-span-7 relative">
+          <!-- Decorative BG glow -->
+          <div class="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-blue-500/10 rounded-3xl blur-2xl"></div>
+
+          <div class="glass-panel rounded-2xl overflow-hidden shadow-2xl relative animate-float flex flex-col md:flex-row h-[420px] border-zinc-800">
+            <!-- Left: Chat Interface -->
+            <div class="flex-1 flex flex-col border-r border-white/5 bg-zinc-900/50">
+              <div class="p-4 border-b border-white/5 flex items-center justify-between bg-zinc-900/80">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-[10px] font-bold">
+                    AI
+                  </div>
+                  <div>
+                    <div class="text-xs text-white font-medium">
+                      Agente de Ventas
+                    </div>
+                    <div class="text-[10px] text-green-500 flex items-center gap-1">
+                      <div class="w-1 h-1 bg-green-500 rounded-full"></div>
+                      En línea
+                    </div>
+                  </div>
+                </div>
+                <i data-lucide="more-horizontal" class="text-zinc-500 w-4 h-4"></i>
+              </div>
+
+              <!-- Chat Area -->
+              <div class="flex-1 p-4 flex flex-col gap-4 overflow-y-auto custom-scroll bg-zinc-950/30">
+                <!-- Message Lead -->
+                <div class="self-start max-w-[85%]">
+                  <div class="bg-zinc-800 text-zinc-200 px-3 py-2 rounded-2xl rounded-tl-none text-xs leading-relaxed border border-white/5">
+                    Hola, estoy interesado en el plan Enterprise. ¿Qué incluye?
+                  </div>
+                  <span class="text-[9px] text-zinc-600 ml-1 mt-1">
+                    10:42 AM
+                  </span>
+                </div>
+
+                <!-- Message Agent -->
+                <div class="self-end max-w-[85%]">
+                  <div class="bg-indigo-600 text-white px-3 py-2 rounded-2xl rounded-tr-none text-xs leading-relaxed shadow-lg shadow-indigo-900/20">
+                    ¡Hola Carlos! Nuestro plan Enterprise incluye soporte
+                    dedicado, SSO y audit logs. ¿Te gustaría agendar una demo
+                    técnica?
+                  </div>
+                  <span class="text-[9px] text-zinc-600 text-right mr-1 mt-1">
+                    10:42 AM
+                  </span>
+                </div>
+
+                <!-- Message Lead -->
+                <div class="self-start max-w-[85%]">
+                  <div class="bg-zinc-800 text-zinc-200 px-3 py-2 rounded-2xl rounded-tl-none text-xs leading-relaxed border border-white/5">
+                    Sí, por favor. ¿Tienen disponibilidad mañana por la tarde?
+                  </div>
+                  <span class="text-[9px] text-zinc-600 ml-1 mt-1">
+                    10:43 AM
+                  </span>
+                </div>
+
+                <!-- Message Agent (Processing) -->
+                <div class="self-end max-w-[85%]">
+                  <div class="flex gap-1 items-center bg-indigo-600/10 border border-indigo-500/20 px-3 py-2 rounded-2xl rounded-tr-none">
+                    <div class="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"></div>
+                    <div class="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                    <div class="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Input area placeholder -->
+              <div class="p-3 border-t border-white/5 bg-zinc-900">
+                <div class="h-8 rounded bg-zinc-800/50 border border-white/5 w-full"></div>
+              </div>
+            </div>
+
+            <!-- Right: Logic/Actions Panel -->
+            <div class="w-full md:w-[240px] bg-zinc-950 flex flex-col text-[10px] font-mono">
+              <div class="p-3 border-b border-white/10 text-zinc-500 uppercase tracking-wider font-semibold">
+                Live Actions
+              </div>
+
+              <div class="flex-1 p-3 space-y-3 overflow-y-auto custom-scroll">
+                <!-- Action 1: Intent -->
+                <div class="flex flex-col gap-1.5">
+                  <div class="flex items-center gap-2 text-zinc-400">
+                    <i data-lucide="brain-circuit" class="w-3 h-3 text-purple-400"></i>
+                    <span>Análisis de Intención</span>
+                  </div>
+                  <div class="p-2 rounded bg-purple-500/10 border border-purple-500/20 text-purple-200">
+                    Intent:
+                    <span class="text-white font-semibold">
+                      booking_request
+                    </span>
+                    <br>
+                    Confidence: 0.98
+                  </div>
+                </div>
+
+                <!-- Action 2: Tool Call -->
+                <div class="flex flex-col gap-1.5">
+                  <div class="flex items-center gap-2 text-zinc-400">
+                    <i data-lucide="calendar" class="w-3 h-3 text-orange-400"></i>
+                    <span>Google Calendar</span>
+                  </div>
+                  <div class="p-2 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">
+                    <span class="text-blue-400">check_availability</span>
+                    ({
+                    <br>
+                    &nbsp;date:
+                    <span class="text-green-400">"2023-10-25"</span>
+                    ,
+                    <br>
+                    &nbsp;time:
+                    <span class="text-green-400">"afternoon"</span>
+                    <br>
+                    })
+                  </div>
+                </div>
+
+                <!-- Action 3: CRM Sync -->
+                <div class="flex flex-col gap-1.5 opacity-60">
+                  <div class="flex items-center gap-2 text-zinc-400">
+                    <i data-lucide="refresh-cw" class="w-3 h-3 text-blue-400"></i>
+                    <span>HubSpot Sync</span>
+                  </div>
+                  <div class="h-1 w-full bg-zinc-800 rounded overflow-hidden">
+                    <div class="h-full bg-blue-500 w-2/3"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Section 2: Integrations (Stack) -->
+      <section class="border-y border-white/5 py-8 bg-zinc-900/20">
+        <div class="flex flex-col items-center gap-6">
+          <span class="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold">
+            Integraciones nativas con tu stack
+          </span>
+          <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+            <!-- Text Logos as requested (Letters only, tight tracking) -->
+            <div class="flex items-center gap-2 font-bold tracking-tighter text-lg text-white group cursor-default">
+              <i data-lucide="box" class="w-4 h-4 text-orange-500"></i>
+              HUBSPOT
+            </div>
+            <div class="flex items-center gap-2 font-bold tracking-tighter text-lg text-white group cursor-default">
+              <i data-lucide="search" class="w-4 h-4 text-blue-500"></i>
+              GOOGLE
+            </div>
+            <div class="flex items-center gap-2 font-bold tracking-tighter text-lg text-white group cursor-default">
+              <i data-lucide="zap" class="w-4 h-4 text-blue-400"></i>
+              SALESFORCE
+            </div>
+            <div class="flex items-center gap-2 font-bold tracking-tighter text-lg text-white group cursor-default">
+              <i data-lucide="infinity" class="w-4 h-4 text-blue-600"></i>
+              META
+            </div>
+            <div class="flex items-center gap-2 font-bold tracking-tighter text-lg text-white group cursor-default">
+              <i data-lucide="message-square" class="w-4 h-4 text-green-500"></i>
+              WHATSAPP
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-16 relative">
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center gap-2 px-2 py-1 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-[10px] uppercase tracking-widest font-semibold mb-4">
+            <i data-lucide="layers" class="w-3 h-3"></i>
+            Workflow Automatizado
+          </div>
+          <h2 class="text-3xl font-medium text-white tracking-tight mb-4">
+            Tu embudo de ventas,
+            <span class="text-indigo-400">en piloto automático</span>
+          </h2>
+          <p class="text-sm text-zinc-400 max-w-2xl mx-auto">
+            Agentia orquesta cada paso del ciclo de vida del cliente. Desde la
+            captura inicial hasta la reunión agendada, sin fricción humana.
+          </p>
+        </div>
+        <div class="relative grid md:grid-cols-4 gap-8">
+          <div class="hidden md:block absolute top-12 left-[12%] right-[12%] h-px bg-gradient-to-r from-indigo-500/0 via-indigo-500/20 to-indigo-500/0 border-t border-dashed border-zinc-700/50 z-0"></div>
+          <div class="relative z-10 flex flex-col items-center text-center group">
+            <div class="w-24 h-24 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 shadow-2xl shadow-black/50 group-hover:-translate-y-1 transition-transform duration-300 relative">
+              <div class="absolute -inset-px bg-gradient-to-b from-indigo-500/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div class="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center border border-white/5 z-10">
+                <i data-lucide="magnet" class="w-5 h-5 text-indigo-400"></i>
+              </div>
+              <div class="absolute -bottom-3 bg-zinc-950 border border-zinc-800 px-2 py-0.5 rounded text-[9px] font-mono text-zinc-500">
+                Step 01
+              </div>
+            </div>
+            <h3 class="text-white font-medium text-sm mb-2">Captación</h3>
+            <p class="text-[11px] text-zinc-500 leading-relaxed px-2">
+              Ingesta instantánea de leads desde Ads, Webforms y Landings.
+            </p>
+          </div>
+          <div class="relative z-10 flex flex-col items-center text-center group">
+            <div class="w-24 h-24 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 shadow-2xl shadow-black/50 group-hover:-translate-y-1 transition-transform duration-300 relative">
+              <div class="absolute -inset-px bg-gradient-to-b from-purple-500/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div class="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center border border-white/5 z-10">
+                <i data-lucide="filter" class="w-5 h-5 text-purple-400"></i>
+              </div>
+              <div class="absolute -bottom-3 bg-zinc-950 border border-zinc-800 px-2 py-0.5 rounded text-[9px] font-mono text-zinc-500">
+                Step 02
+              </div>
+            </div>
+            <h3 class="text-white font-medium text-sm mb-2">Filtrado IA</h3>
+            <p class="text-[11px] text-zinc-500 leading-relaxed px-2">
+              Análisis de perfil y scoring predictivo para descartar spam.
+            </p>
+          </div>
+          <div class="relative z-10 flex flex-col items-center text-center group">
+            <div class="w-24 h-24 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 shadow-2xl shadow-black/50 group-hover:-translate-y-1 transition-transform duration-300 relative">
+              <div class="absolute -inset-px bg-gradient-to-b from-blue-500/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div class="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center border border-white/5 z-10">
+                <i data-lucide="message-square-dashed" class="w-5 h-5 text-blue-400"></i>
+              </div>
+              <div class="absolute -bottom-3 bg-zinc-950 border border-zinc-800 px-2 py-0.5 rounded text-[9px] font-mono text-zinc-500">
+                Step 03
+              </div>
+            </div>
+            <h3 class="text-white font-medium text-sm mb-2">Nutrición</h3>
+            <p class="text-[11px] text-zinc-500 leading-relaxed px-2">
+              Seguimiento multicanal para madurar el interés del prospecto.
+            </p>
+          </div>
+          <div class="relative z-10 flex flex-col items-center text-center group">
+            <div class="w-24 h-24 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 shadow-2xl shadow-black/50 group-hover:-translate-y-1 transition-transform duration-300 relative">
+              <div class="absolute -inset-px bg-gradient-to-b from-green-500/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div class="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center border border-white/5 z-10">
+                <i data-lucide="calendar-check" class="w-5 h-5 text-green-400"></i>
+              </div>
+              <div class="absolute -bottom-3 bg-zinc-950 border border-zinc-800 px-2 py-0.5 rounded text-[9px] font-mono text-zinc-500">
+                Step 04
+              </div>
+            </div>
+            <h3 class="text-white font-medium text-sm mb-2">Conversión</h3>
+            <p class="text-[11px] text-zinc-500 leading-relaxed px-2">
+              Reunión agendada automáticamente en el calendario.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: CRM & Leads Dashboard -->
+      <section class="py-12 flex flex-col gap-6">
+        <div class="flex items-end justify-between px-2">
+          <div>
+            <h2 class="text-2xl font-medium text-white tracking-tight mb-2">
+              CRM en Tiempo Real
+            </h2>
+            <p class="text-sm text-zinc-400 max-w-lg">
+              Visualiza cómo tus agentes interactúan, califican y convierten
+              leads automáticamente. Todo sincronizado.
+            </p>
+          </div>
+          <button class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1 font-medium">
+            Ver pipeline completo
+            <i data-lucide="arrow-right" class="w-3 h-3"></i>
+          </button>
+        </div>
+
+        <!-- CRM Table Component -->
+        <div class="glass-panel rounded-xl overflow-hidden border border-zinc-800/50">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-white/5 bg-zinc-900/50 text-[10px] uppercase tracking-wider text-zinc-500 font-medium">
+                  <th class="px-6 py-3 font-medium">Lead</th>
+                  <th class="px-6 py-3 font-medium">Estado</th>
+                  <th class="px-6 py-3 font-medium">Interacción</th>
+                  <th class="px-6 py-3 font-medium">Próximo Paso</th>
+                  <th class="px-6 py-3 font-medium text-right">Score</th>
+                </tr>
+              </thead>
+              <tbody class="text-xs divide-y divide-white/5">
+                <!-- Row 1 -->
+                <tr class="group hover:bg-zinc-800/30 transition-colors">
+                  <td class="px-6 py-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-[10px] font-bold border border-blue-500/20">
+                        JS
+                      </div>
+                      <div class="font-medium text-zinc-200">Juan Silva</div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-3">
+                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-green-500/10 text-green-400 border border-green-500/20">
+                      Calificado
+                    </span>
+                  </td>
+                  <td class="px-6 py-3 text-zinc-400">
+                    <div class="flex items-center gap-1.5">
+                      <i data-lucide="message-circle" class="w-3 h-3 text-zinc-600"></i>
+                      <span>Demo solicitada</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-3 text-zinc-300">
+                    Meeting (Mañana, 10:00 AM)
+                  </td>
+                  <td class="px-6 py-3 text-right font-mono text-green-400">
+                    92%
+                  </td>
+                </tr>
+
+                <!-- Row 2 -->
+                <tr class="group hover:bg-zinc-800/30 transition-colors">
+                  <td class="px-6 py-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-6 h-6 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center text-[10px] font-bold border border-orange-500/20">
+                        MR
+                      </div>
+                      <div class="font-medium text-zinc-200">Maria Ruiz</div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-3">
+                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+                      Negociación
+                    </span>
+                  </td>
+                  <td class="px-6 py-3 text-zinc-400">
+                    <div class="flex items-center gap-1.5">
+                      <i data-lucide="phone" class="w-3 h-3 text-zinc-600"></i>
+                      <span>Llamada finalizada</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-3 text-zinc-300">Enviar contrato</td>
+                  <td class="px-6 py-3 text-right font-mono text-yellow-400">
+                    75%
+                  </td>
+                </tr>
+
+                <!-- Row 3 -->
+                <tr class="group hover:bg-zinc-800/30 transition-colors">
+                  <td class="px-6 py-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-6 h-6 rounded-full bg-zinc-700/50 text-zinc-400 flex items-center justify-center text-[10px] font-bold border border-zinc-600/20">
+                        AL
+                      </div>
+                      <div class="font-medium text-zinc-200">Ana López</div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-3">
+                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-zinc-800 text-zinc-400 border border-zinc-700">
+                      Nuevo
+                    </span>
+                  </td>
+                  <td class="px-6 py-3 text-zinc-400">
+                    <div class="flex items-center gap-1.5">
+                      <i data-lucide="mail" class="w-3 h-3 text-zinc-600"></i>
+                      <span>Email recibido</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-3 text-zinc-300">
+                    Agente respondiendo...
+                  </td>
+                  <td class="px-6 py-3 text-right font-mono text-zinc-500">
+                    --
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Calendar & Scheduling (New Section) -->
+      <section class="py-12 grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Visual Calendar -->
+        <div class="order-2 lg:order-1 relative">
+          <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-2xl blur-xl"></div>
+          <div class="glass-panel rounded-xl overflow-hidden border border-zinc-800 flex flex-col relative z-10">
+            <!-- Calendar Header -->
+            <div class="flex items-center justify-between p-4 border-b border-white/5 bg-zinc-900/50">
+              <div class="flex items-center gap-2">
+                <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+              </div>
+              <div class="text-[10px] font-medium text-zinc-500">Oct 2023</div>
+            </div>
+
+            <!-- Calendar Grid -->
+            <div class="flex text-xs bg-zinc-950/80">
+              <!-- Time Column -->
+              <div class="w-12 border-r border-white/5 flex flex-col items-center py-2 gap-8 text-[10px] text-zinc-600 font-mono">
+                <span>9 AM</span>
+                <span>10 AM</span>
+                <span>11 AM</span>
+                <span>12 PM</span>
+                <span>1 PM</span>
+              </div>
+
+              <!-- Days Grid -->
+              <div class="flex-1 grid grid-cols-3 relative cal-grid">
+                <!-- Day Headers (Overlay) -->
+                <div class="absolute top-0 left-0 right-0 flex border-b border-white/5">
+                  <div class="flex-1 py-1 text-center text-[10px] text-zinc-500">
+                    Mon 24
+                  </div>
+                  <div class="flex-1 py-1 text-center text-[10px] text-white font-medium bg-white/5">
+                    Tue 25
+                  </div>
+                  <div class="flex-1 py-1 text-center text-[10px] text-zinc-500">
+                    Wed 26
+                  </div>
+                </div>
+
+                <!-- Column 1: Mon -->
+                <div class="pt-8 relative border-r border-white/5 h-[200px]">
+                  <!-- Event -->
+                  <div class="absolute top-[40px] left-1 right-1 h-[60px] bg-zinc-800/80 border-l-2 border-zinc-600 rounded-r px-2 py-1.5">
+                    <div class="text-[9px] text-zinc-300 font-medium">
+                      Daily Sync
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Column 2: Tue (Active) -->
+                <div class="pt-8 relative border-r border-white/5 bg-white/[0.01] h-[200px]">
+                  <!-- Current Time Indicator -->
+                  <div class="absolute top-[90px] left-0 right-0 h-px bg-red-500/50 z-20 flex items-center">
+                    <div class="w-1 h-1 rounded-full bg-red-500 -ml-0.5"></div>
+                  </div>
+
+                  <!-- New AI Booked Event -->
+                  <div class="absolute top-[120px] left-1 right-1 h-[60px] bg-indigo-500/20 border-l-2 border-indigo-500 rounded-r px-2 py-1.5 animate-slide-up ring-1 ring-indigo-500/20 shadow-lg shadow-indigo-500/10 group cursor-pointer">
+                    <div class="flex justify-between items-start text-[9px] text-indigo-200 font-medium">
+                      <span>Demo: Agentia</span>
+                      <i data-lucide="check-circle-2" class="w-3 h-3"></i>
+                    </div>
+                    <div class="text-[8px] text-indigo-300/70 mt-0.5">
+                      Scheduled by AI
+                    </div>
+                    <!-- Tooltip -->
+                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-zinc-900 text-[9px] px-2 py-1 rounded border border-zinc-700 text-white opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-30">
+                      Sincronizado con Google Calendar
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Column 3: Wed -->
+                <div class="pt-8 relative h-[200px]">
+                  <div class="absolute top-[20px] left-1 right-1 h-[40px] bg-zinc-800/80 border-l-2 border-zinc-600 rounded-r px-2 py-1.5">
+                    <div class="text-[9px] text-zinc-300 font-medium">
+                      Deep Work
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Badge -->
+          <div class="absolute -right-4 top-1/2 glass-panel px-3 py-2 rounded-lg flex items-center gap-3 animate-float shadow-xl" style="animation-delay: 1s">
+            <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+              <i data-lucide="calendar-check" class="w-4 h-4 text-green-400"></i>
+            </div>
+            <div>
+              <div class="text-[10px] text-zinc-400 uppercase tracking-wider">
+                Status
+              </div>
+              <div class="text-xs font-medium text-white">Reunión Agendada</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copy -->
+        <div class="order-1 lg:order-2">
+          <div class="inline-flex items-center gap-2 px-2 py-1 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-[10px] uppercase tracking-widest font-semibold mb-4">
+            <i data-lucide="clock" class="w-3 h-3"></i>
+            Auto-Scheduling
+          </div>
+          <h2 class="text-3xl font-medium text-white tracking-tight mb-4">
+            Tu calendario, gestionado por IA
+          </h2>
+          <p class="text-sm text-zinc-400 leading-relaxed mb-6">
+            Olvídate de los correos de ida y vuelta. Agentia accede a tu
+            disponibilidad real, negocia horarios con el cliente y bloquea el
+            espacio en tu calendario automáticamente.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex gap-3">
+              <div class="w-6 h-6 rounded bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0">
+                <i data-lucide="globe" class="w-3.5 h-3.5 text-indigo-400"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-medium text-white mb-0.5">
+                  Detección de Zona Horaria
+                </h4>
+                <p class="text-xs text-zinc-500">
+                  Convierte automáticamente las horas locales del cliente a tu
+                  zona horaria.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-6 h-6 rounded bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-indigo-400"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-medium text-white mb-0.5">
+                  Protección contra doble reserva
+                </h4>
+                <p class="text-xs text-zinc-500">
+                  Lectura en tiempo real de Google Calendar y Outlook para
+                  evitar conflictos.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-6 h-6 rounded bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0">
+                <i data-lucide="users" class="w-3.5 h-3.5 text-indigo-400"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-medium text-white mb-0.5">
+                  Round Robin
+                </h4>
+                <p class="text-xs text-zinc-500">
+                  Distribuye las citas equitativamente entre los miembros de tu
+                  equipo de ventas.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Benefits & Productivity -->
+      <section class="grid md:grid-cols-3 gap-4 lg:gap-6 py-6 border-t border-white/5">
+        <!-- Benefit 1: Cost Reduction -->
+        <div class="p-6 rounded-xl bg-zinc-900/30 border border-white/5 hover:border-indigo-500/30 transition-colors group">
+          <div class="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center mb-4 group-hover:bg-indigo-500/10 transition-colors">
+            <i data-lucide="trending-down" class="text-zinc-400 group-hover:text-indigo-400 w-5 h-5"></i>
+          </div>
+          <h3 class="text-base text-white font-medium mb-2">
+            -70% Costos Operativos
+          </h3>
+          <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+            Reemplaza equipos de soporte L1 y SDRs con agentes autónomos. Reduce
+            drásticamente el costo por lead atendido y horas hombre.
+          </p>
+          <!-- Mini Chart -->
+          <div class="h-16 flex items-end justify-between px-2 gap-2 opacity-50">
+            <div class="w-full bg-zinc-800 rounded-t h-[80%]"></div>
+            <div class="w-full bg-zinc-800 rounded-t h-[60%]"></div>
+            <div class="w-full bg-indigo-500 rounded-t h-[20%] relative">
+              <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-[9px] text-indigo-400 font-mono">
+                -70%
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Benefit 2: Scalability -->
+        <div class="p-6 rounded-xl bg-zinc-900/30 border border-white/5 hover:border-indigo-500/30 transition-colors group">
+          <div class="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center mb-4 group-hover:bg-indigo-500/10 transition-colors">
+            <i data-lucide="zap" class="text-zinc-400 group-hover:text-indigo-400 w-5 h-5"></i>
+          </div>
+          <h3 class="text-base text-white font-medium mb-2">
+            Disponibilidad 24/7
+          </h3>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            Sin turnos, sin vacaciones, sin tiempos muertos. Tus agentes
+            responden instantáneamente a las 3 AM o durante picos de tráfico.
+          </p>
+          <div class="mt-4 flex items-center gap-3 pt-2 border-t border-white/5">
+            <div class="flex flex-col">
+              <span class="text-lg font-mono text-white">0.2s</span>
+              <span class="text-[9px] text-zinc-500 uppercase">Latencia</span>
+            </div>
+            <div class="w-px h-6 bg-white/10"></div>
+            <div class="flex flex-col">
+              <span class="text-lg font-mono text-white">∞</span>
+              <span class="text-[9px] text-zinc-500 uppercase">
+                Concurrencia
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Benefit 3: Agent Capabilities -->
+        <div class="p-6 rounded-xl bg-zinc-900/30 border border-white/5 hover:border-indigo-500/30 transition-colors group flex flex-col">
+          <div class="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center mb-4 group-hover:bg-indigo-500/10 transition-colors">
+            <i data-lucide="cpu" class="text-zinc-400 group-hover:text-indigo-400 w-5 h-5"></i>
+          </div>
+          <h3 class="text-base text-white font-medium mb-2">
+            Capacidades Avanzadas
+          </h3>
+          <ul class="text-xs text-zinc-400 space-y-3 mt-1">
+            <li class="flex items-start gap-2">
+              <i data-lucide="database" class="w-3.5 h-3.5 text-indigo-400 mt-0.5"></i>
+              <span>
+                <strong class="text-zinc-200 font-normal">
+                  Base de Conocimiento:
+                </strong>
+                Entrena a tu agente con tus PDFs, Notion y sitio web.
+              </span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="user-plus" class="w-3.5 h-3.5 text-indigo-400 mt-0.5"></i>
+              <span>
+                <strong class="text-zinc-200 font-normal">
+                  Derivación Inteligente:
+                </strong>
+                Detecta leads VIP y los transfiere a ejecutivos humanos.
+              </span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="code-2" class="w-3.5 h-3.5 text-indigo-400 mt-0.5"></i>
+              <span>
+                <strong class="text-zinc-200 font-normal">
+                  MCP Personalizados:
+                </strong>
+                Crea lógica de negocio a medida mediante Model Context Protocol.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Section 6: Voice Engine -->
+      <section class="py-12 relative">
+        <div class="glass-panel p-8 rounded-2xl relative overflow-hidden flex flex-col md:flex-row items-center gap-8 md:gap-12 border border-zinc-800">
+          <div class="flex-1 z-10">
+            <div class="inline-flex items-center gap-2 px-2 py-1 rounded bg-rose-500/10 border border-rose-500/20 text-rose-400 text-[10px] uppercase tracking-widest font-semibold mb-4">
+              <i data-lucide="mic" class="w-3 h-3"></i>
+              Voice Engine 1.0
+            </div>
+            <h2 class="text-2xl md:text-3xl font-medium text-white mb-4 tracking-tight">
+              Agentes de Voz Ultra-Realistas
+            </h2>
+            <p class="text-sm text-zinc-400 leading-relaxed mb-6">
+              Interactúa con tus clientes mediante voz natural. Latencia
+              sub-500ms, interrupciones manejadas y entonación emocional
+              adaptativa.
+            </p>
+            <button class="flex items-center gap-2 bg-white text-zinc-950 px-4 py-2 rounded text-xs font-medium hover:bg-zinc-200 transition-colors shadow-lg shadow-white/5">
+              <i data-lucide="play" class="w-3 h-3"></i>
+              <span>Escuchar Demo</span>
+            </button>
+          </div>
+          <div class="w-full md:w-1/2 h-40 bg-zinc-900/50 rounded-lg flex items-center justify-center gap-1.5 relative overflow-hidden border border-white/5">
+            <div class="absolute inset-0 bg-gradient-to-t from-rose-500/5 to-transparent bottom-0"></div>
+            <div class="w-1.5 h-8 bg-rose-500 rounded-full animate-pulse"></div>
+            <div class="w-1.5 h-12 bg-rose-500 rounded-full animate-pulse" style="animation-delay: 0.1s"></div>
+            <div class="w-1.5 h-16 bg-rose-500 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+            <div class="w-1.5 h-10 bg-rose-500 rounded-full animate-pulse" style="animation-delay: 0.15s"></div>
+            <div class="w-1.5 h-6 bg-rose-500 rounded-full animate-pulse" style="animation-delay: 0.05s"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 7: Testimonials -->
+      <section class="py-16 border-t border-white/5">
+        <div class="text-center mb-10">
+          <h2 class="text-2xl font-medium text-white tracking-tight mb-2">
+            Lo que dicen nuestros clientes
+          </h2>
+          <p class="text-sm text-zinc-400">
+            Equipos de alto rendimiento que escalan con Agentia
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Testimonial 1 -->
+          <div class="p-6 rounded-xl bg-zinc-900/30 border border-white/5 flex flex-col">
+            <div class="flex gap-1 mb-4">
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+            </div>
+            <p class="text-xs text-zinc-300 leading-relaxed mb-6 flex-1">
+              "Redujimos el tiempo de respuesta de 4 horas a segundos. La
+              integración con nuestro CRM fue impecable y el soporte es
+              excelente."
+            </p>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-zinc-300 border border-white/5">
+                CR
+              </div>
+              <div>
+                <div class="text-xs font-medium text-white">
+                  Carlos Rodríguez
+                </div>
+                <div class="text-[10px] text-zinc-500">CTO, TechFlow</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="p-6 rounded-xl bg-zinc-900/30 border border-white/5 flex flex-col">
+            <div class="flex gap-1 mb-4">
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+            </div>
+            <p class="text-xs text-zinc-300 leading-relaxed mb-6 flex-1">
+              "Los agentes de voz suenan increíblemente humanos. Nuestros
+              clientes no notan la diferencia y la tasa de conversión subió un
+              40%."
+            </p>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-zinc-300 border border-white/5">
+                LM
+              </div>
+              <div>
+                <div class="text-xs font-medium text-white">Laura Méndez</div>
+                <div class="text-[10px] text-zinc-500">VP Sales, NovaGroup</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="p-6 rounded-xl bg-zinc-900/30 border border-white/5 flex flex-col">
+            <div class="flex gap-1 mb-4">
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+            </div>
+            <p class="text-xs text-zinc-300 leading-relaxed mb-6 flex-1">
+              "La mejor inversión en automatización que hemos hecho. El
+              dashboard de leads en tiempo real nos da una visibilidad sin
+              precedentes."
+            </p>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-zinc-300 border border-white/5">
+                DP
+              </div>
+              <div>
+                <div class="text-xs font-medium text-white">David Pérez</div>
+                <div class="text-[10px] text-zinc-500">Founder, ScaleUp</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Footer -->
+      <section class="py-16 grid lg:grid-cols-2 gap-12 items-center border-t border-white/5">
+        <div>
+          <h2 class="text-3xl font-medium text-white tracking-tight mb-4">
+            Empieza a automatizar hoy
+          </h2>
+          <p class="text-sm text-zinc-400 mb-8 leading-relaxed max-w-md">
+            Únete a las empresas que usan Agentia para escalar sus ventas 24/7.
+            Completa el formulario y accede a una demo personalizada.
+          </p>
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-3 text-xs text-zinc-300">
+              <div class="w-5 h-5 rounded-full bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20">
+                <i data-lucide="check" class="w-3 h-3 text-indigo-400"></i>
+              </div>
+              <span>Sin tarjeta de crédito requerida</span>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-zinc-300">
+              <div class="w-5 h-5 rounded-full bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20">
+                <i data-lucide="check" class="w-3 h-3 text-indigo-400"></i>
+              </div>
+              <span>Setup inicial gratuito</span>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-zinc-300">
+              <div class="w-5 h-5 rounded-full bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20">
+                <i data-lucide="check" class="w-3 h-3 text-indigo-400"></i>
+              </div>
+              <span>Soporte prioritario 24/7</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel p-6 rounded-xl border border-zinc-800 shadow-2xl">
+          <form class="flex flex-col gap-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[10px] font-medium text-zinc-500 uppercase tracking-wider">
+                  Nombre
+                </label>
+                <input type="text" class="bg-zinc-900/50 border border-white/10 rounded px-3 py-2.5 text-xs text-white placeholder-zinc-700 focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Tu nombre">
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[10px] font-medium text-zinc-500 uppercase tracking-wider">
+                  Empresa
+                </label>
+                <input type="text" class="bg-zinc-900/50 border border-white/10 rounded px-3 py-2.5 text-xs text-white placeholder-zinc-700 focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Nombre empresa">
+              </div>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[10px] font-medium text-zinc-500 uppercase tracking-wider">
+                Email Corporativo
+              </label>
+              <input type="email" class="bg-zinc-900/50 border border-white/10 rounded px-3 py-2.5 text-xs text-white placeholder-zinc-700 focus:outline-none focus:border-indigo-500 transition-colors" placeholder="juan@empresa.com">
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[10px] font-medium text-zinc-500 uppercase tracking-wider">
+                Mensaje
+              </label>
+              <textarea rows="3" class="bg-zinc-900/50 border border-white/10 rounded px-3 py-2.5 text-xs text-white placeholder-zinc-700 focus:outline-none focus:border-indigo-500 transition-colors resize-none" placeholder="¿Cómo podemos ayudarte?"></textarea>
+            </div>
+            <button type="button" class="mt-2 bg-white text-zinc-950 hover:bg-zinc-200 text-xs font-bold py-3 rounded transition-colors flex items-center justify-center gap-2 shadow-lg shadow-white/5">
+              Solicitar Demo
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </form>
+        </div>
+      </section>
+      <footer class="mt-8 border-t border-white/5 pt-8 pb-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2">
+            <i data-lucide="bot" class="w-4 h-4 text-indigo-500"></i>
+            <span class="text-xs font-semibold text-zinc-300">
+              Agentia Inc.
+            </span>
+          </div>
+          <p class="text-[10px] text-zinc-500">
+            Automatización inteligente para equipos de venta modernos.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-6">
+          <a href="#" class="text-[10px] text-zinc-500 hover:text-white transition-colors uppercase tracking-wider font-medium">
+            Documentación
+          </a>
+          <a href="#" class="text-[10px] text-zinc-500 hover:text-white transition-colors uppercase tracking-wider font-medium">
+            Status
+          </a>
+          <a href="#" class="text-[10px] text-zinc-500 hover:text-white transition-colors uppercase tracking-wider font-medium">
+            Twitter
+          </a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="fixed bottom-6 right-6 z-50">
+      <button class="bg-indigo-600 hover:bg-indigo-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-indigo-500/20 transition-all hover:scale-105 hover:-translate-y-1 group relative">
+        <i data-lucide="message-square" class="w-6 h-6"></i>
+        <span class="absolute top-0 right-0 flex h-3.5 w-3.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 border-2 border-zinc-950"></span>
+        </span>
+      </button>
+    </div>
+    <script>
+      lucide.createIcons();
+    </script>
+  
+</body></html>

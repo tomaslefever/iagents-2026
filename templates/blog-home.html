@@ -1,0 +1,532 @@
+<html lang="es" class="dark"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog de Ingeniería - Agentia MCP</title>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+darkMode: 'class',
+theme: {
+extend: {
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+mono: ['JetBrains Mono', 'monospace'],
+},
+colors: {
+zinc: {
+850: '#1f1f22',
+900: '#18181b',
+950: '#09090b',
+}
+},
+animation: {
+'blur-in': 'blurIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+'slide-up': 'slideUp 0.3s ease-out forwards',
+},
+keyframes: {
+blurIn: {
+'0%': { filter: 'blur(10px)', opacity: '0', transform: 'translateY(10px)' },
+'100%': { filter: 'blur(0)', opacity: '1', transform: 'translateY(0)' },
+},
+slideUp: {
+'0%': { opacity: '0', transform: 'translateY(10px)' },
+'100%': { opacity: '1', transform: 'translateY(0)' },
+}
+}
+}
+}
+}
+</script>
+<!-- Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+.custom-scroll::-webkit-scrollbar {
+width: 4px;
+height: 4px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+background: transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+background-color: #3f3f46;
+border-radius: 20px;
+}
+.grid-bg {
+background-size: 40px 40px;
+background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+.glass-card {
+background: rgba(24, 24, 27, 0.6);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+}
+.article-gradient {
+background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.15), transparent 60%);
+}
+</style></head>
+  <body class="bg-zinc-950 text-zinc-300 font-sans min-h-screen flex flex-col items-center p-4 lg:p-6 selection:bg-emerald-500/30 overflow-x-hidden relative">
+    <!-- Background Ambience -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      <div class="absolute -top-[20%] left-[50%] -translate-x-1/2 w-[800px] h-[600px] bg-emerald-900/10 rounded-full blur-3xl opacity-30"></div>
+      <div class="absolute bottom-[20%] right-[10%] w-[500px] h-[500px] bg-indigo-900/10 rounded-full blur-3xl opacity-30"></div>
+      <div class="absolute inset-0 grid-bg opacity-40"></div>
+    </div>
+
+    <!-- Container Wrapper -->
+    <div class="w-full max-w-[1100px] flex flex-col gap-8 relative z-10 animate-blur-in">
+      <!-- Navbar (Consistent) -->
+      <header class="flex items-center justify-between py-4 relative z-50">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 bg-zinc-100 rounded-sm flex items-center justify-center">
+            <div class="w-2 h-2 bg-zinc-900 rounded-full"></div>
+          </div>
+          <a href="#" class="font-medium tracking-tight text-white text-sm hover:opacity-80 transition-opacity">
+            AGENTIA
+            <span class="text-zinc-500">/ BLOG</span>
+          </a>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-1 text-xs font-medium text-zinc-500">
+          <a href="#" class="px-3 py-2 hover:text-white transition-colors">
+            Soluciones
+          </a>
+          <a href="#" class="px-3 py-2 text-white bg-white/5 rounded-full transition-colors">
+            Ingeniería
+          </a>
+          <a href="#" class="px-3 py-2 hover:text-white transition-colors">
+            Protocolo
+          </a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <button class="text-xs font-medium text-zinc-400 hover:text-white transition-colors">
+            Subscribe
+          </button>
+          <button class="bg-white text-zinc-950 text-xs px-3 py-1.5 rounded font-medium hover:bg-zinc-200 transition-colors border border-white">
+            Cotizar
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="flex flex-col gap-12 py-8 min-h-[60vh]">
+        
+        <!-- Header Section -->
+        <section class="flex flex-col gap-4 border-b border-white/5 pb-12">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-medium text-white tracking-tight mb-2">
+                        Ingeniería &amp; Reflexiones
+                    </h1>
+                    <p class="text-sm text-zinc-400 max-w-xl leading-relaxed">
+                        Explorando los límites de la interoperabilidad en IA. Guías técnicas sobre MCP, diseño de APIs y orquestación de agentes.
+                    </p>
+                </div>
+                <button class="hidden md:flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-zinc-400 text-xs transition-colors">
+                    <i data-lucide="rss" class="w-3.5 h-3.5"></i>
+                    RSS Feed
+                </button>
+            </div>
+        </section>
+
+        <!-- Featured Article -->
+        <section class="relative group cursor-pointer">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-emerald-500/20 to-indigo-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
+            <article class="relative grid md:grid-cols-2 bg-zinc-900 border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-colors">
+                <!-- Visual / Thumbnail area -->
+                <div class="bg-zinc-950 p-8 flex items-center justify-center relative overflow-hidden h-64 md:h-auto border-b md:border-b-0 md:border-r border-white/5">
+                    <div class="absolute inset-0 bg-[radial-gradient(#ffffff05_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                    <!-- Abstract Code Visualization -->
+                    <div class="w-full max-w-[320px] bg-zinc-900 rounded-lg border border-white/10 shadow-2xl p-4 font-mono text-[10px] text-zinc-400 relative z-10 opacity-90 group-hover:scale-[1.02] transition-transform duration-500">
+                        <div class="flex gap-1.5 mb-3 border-b border-white/5 pb-2">
+                            <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+                            <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
+                            <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-purple-400">class</span> <span class="text-yellow-200">MCPServer</span>:
+                            <div class="pl-4 text-zinc-500"># Implementación nativa</div>
+                            <div class="pl-4"><span class="text-blue-400">def</span> <span class="text-emerald-400">connect</span>(self, source):</div>
+                            <div class="pl-8 text-zinc-500">"""Establece puente seguro"""</div>
+                            <div class="pl-8">return <span class="text-orange-400">True</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Content area -->
+                <div class="p-8 md:p-10 flex flex-col justify-between items-start gap-6 article-gradient">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="px-2 py-1 rounded text-[10px] font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                DEEP DIVE
+                            </span>
+                            <span class="text-xs text-zinc-500 font-mono">Hace 2 días</span>
+                        </div>
+                        <h2 class="text-2xl font-medium text-white tracking-tight leading-snug group-hover:text-emerald-400 transition-colors">
+                            Arquitectura de un Servidor MCP Escalable: De 0 a Producción
+                        </h2>
+                        <p class="text-sm text-zinc-400 leading-relaxed">
+                            Analizamos cómo estructurar un servidor MCP robusto que pueda manejar miles de requests de agentes simultáneos sin comprometer la seguridad de tu API interna.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 mt-auto pt-4">
+                        <div class="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center text-xs text-white font-medium">DA</div>
+                        <span class="text-xs text-zinc-300 font-medium">David Arroyo</span>
+                        <span class="text-[10px] text-zinc-600">•</span>
+                        <span class="text-xs text-zinc-500">12 min lectura</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Filters & Search -->
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sticky top-4 z-40 bg-zinc-950/80 backdrop-blur-md py-4 -my-4 border-b border-white/5">
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar w-full md:w-auto pb-2 md:pb-0">
+                <button class="px-3 py-1.5 rounded-full bg-white text-zinc-950 text-xs font-medium border border-white">
+                    Todos
+                </button>
+                <button class="px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white text-xs font-medium border border-white/10 transition-colors whitespace-nowrap">
+                    Tutoriales
+                </button>
+                <button class="px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white text-xs font-medium border border-white/10 transition-colors whitespace-nowrap">
+                    Seguridad
+                </button>
+                <button class="px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white text-xs font-medium border border-white/10 transition-colors whitespace-nowrap">
+                    Casos de Uso
+                </button>
+            </div>
+            
+            <div class="relative w-full md:w-64">
+                <i data-lucide="search" class="absolute left-3 top-2.5 w-3.5 h-3.5 text-zinc-500"></i>
+                <input type="text" placeholder="Buscar artículos..." class="w-full bg-zinc-900/50 border border-white/10 rounded-lg pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-zinc-700 transition-colors placeholder-zinc-600">
+            </div>
+        </div>
+
+        <!-- Article Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Article 1 -->
+            <a href="#" class="group flex flex-col h-full bg-zinc-900/20 border border-white/5 hover:border-white/10 rounded-xl overflow-hidden transition-all hover:bg-zinc-900/40">
+                <div class="h-40 bg-zinc-900/50 relative overflow-hidden border-b border-white/5">
+                     <div class="absolute inset-0 opacity-50 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-900/40 via-zinc-900 to-zinc-900"></div>
+                     <div class="absolute top-4 left-4 p-2 bg-zinc-950 rounded border border-white/10 shadow-lg group-hover:translate-y-1 transition-transform">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-indigo-400"></i>
+                     </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1 gap-3">
+                    <div class="flex items-center gap-2 text-[10px] font-mono text-zinc-500">
+                        <span class="text-indigo-400">Seguridad</span>
+                        <span>•</span>
+                        <span>20 Oct</span>
+                    </div>
+                    <h3 class="text-base font-medium text-white group-hover:text-indigo-300 transition-colors">
+                        Autenticación OAuth2 en Entornos MCP
+                    </h3>
+                    <p class="text-xs text-zinc-400 leading-relaxed line-clamp-3 mb-4">
+                        Guía práctica para implementar flujos de autorización seguros cuando un Agente de IA necesita acceder a datos privados del usuario.
+                    </p>
+                    <div class="mt-auto flex items-center gap-2 pt-2 border-t border-white/5">
+                        <span class="text-[10px] text-zinc-500">Lectura: 8 min</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Article 2 -->
+            <a href="#" class="group flex flex-col h-full bg-zinc-900/20 border border-white/5 hover:border-white/10 rounded-xl overflow-hidden transition-all hover:bg-zinc-900/40">
+                <div class="h-40 bg-zinc-900/50 relative overflow-hidden border-b border-white/5">
+                     <div class="absolute inset-0 opacity-50 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-900/40 via-zinc-900 to-zinc-900"></div>
+                     <div class="absolute bottom-4 right-4 flex gap-1">
+                        <div class="w-1 h-3 bg-emerald-500/30 rounded-full"></div>
+                        <div class="w-1 h-5 bg-emerald-500/60 rounded-full"></div>
+                        <div class="w-1 h-8 bg-emerald-400 rounded-full"></div>
+                     </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1 gap-3">
+                    <div class="flex items-center gap-2 text-[10px] font-mono text-zinc-500">
+                        <span class="text-emerald-400">Rendimiento</span>
+                        <span>•</span>
+                        <span>15 Oct</span>
+                    </div>
+                    <h3 class="text-base font-medium text-white group-hover:text-emerald-300 transition-colors">
+                        Optimizando Latencia en Tools de LLMs
+                    </h3>
+                    <p class="text-xs text-zinc-400 leading-relaxed line-clamp-3 mb-4">
+                        Por qué cada milisegundo cuenta cuando un modelo "piensa". Estrategias de caching para respuestas JSON-RPC.
+                    </p>
+                    <div class="mt-auto flex items-center gap-2 pt-2 border-t border-white/5">
+                        <span class="text-[10px] text-zinc-500">Lectura: 5 min</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Article 3 -->
+            <a href="#" class="group flex flex-col h-full bg-zinc-900/20 border border-white/5 hover:border-white/10 rounded-xl overflow-hidden transition-all hover:bg-zinc-900/40">
+                <div class="h-40 bg-zinc-900/50 relative overflow-hidden border-b border-white/5 flex items-center justify-center">
+                    <div class="grid grid-cols-2 gap-2 opacity-60">
+                         <div class="w-8 h-8 rounded border border-white/10 bg-zinc-800 flex items-center justify-center"><i data-lucide="braces" class="w-4 h-4 text-zinc-400"></i></div>
+                         <div class="w-8 h-8 rounded border border-white/10 bg-zinc-800 flex items-center justify-center"><i data-lucide="arrow-right" class="w-4 h-4 text-zinc-600"></i></div>
+                         <div class="w-8 h-8 rounded border border-white/10 bg-zinc-800 flex items-center justify-center"><i data-lucide="database" class="w-4 h-4 text-zinc-400"></i></div>
+                         <div class="w-8 h-8 rounded border border-white/10 bg-zinc-800 flex items-center justify-center"><i data-lucide="box" class="w-4 h-4 text-zinc-400"></i></div>
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1 gap-3">
+                    <div class="flex items-center gap-2 text-[10px] font-mono text-zinc-500">
+                        <span class="text-orange-400">Legacy</span>
+                        <span>•</span>
+                        <span>12 Oct</span>
+                    </div>
+                    <h3 class="text-base font-medium text-white group-hover:text-orange-300 transition-colors">
+                        Wrappers: De SOAP a MCP
+                    </h3>
+                    <p class="text-xs text-zinc-400 leading-relaxed line-clamp-3 mb-4">
+                        Caso de estudio: Cómo modernizamos una infraestructura bancaria legacy sin reescribir el core, usando adaptadores MCP.
+                    </p>
+                    <div class="mt-auto flex items-center gap-2 pt-2 border-t border-white/5">
+                        <span class="text-[10px] text-zinc-500">Lectura: 18 min</span>
+                    </div>
+                </div>
+            </a>
+
+             <!-- Article 4 -->
+             <a href="#" class="group flex flex-col h-full bg-zinc-900/20 border border-white/5 hover:border-white/10 rounded-xl overflow-hidden transition-all hover:bg-zinc-900/40">
+                <div class="h-40 bg-zinc-900/50 relative overflow-hidden border-b border-white/5 flex items-center justify-center">
+                    <div class="absolute w-24 h-24 bg-blue-500/10 rounded-full blur-xl"></div>
+                    <i data-lucide="terminal" class="w-8 h-8 text-blue-400 relative z-10"></i>
+                </div>
+                <div class="p-5 flex flex-col flex-1 gap-3">
+                    <div class="flex items-center gap-2 text-[10px] font-mono text-zinc-500">
+                        <span class="text-blue-400">Desarrollo</span>
+                        <span>•</span>
+                        <span>08 Oct</span>
+                    </div>
+                    <h3 class="text-base font-medium text-white group-hover:text-blue-300 transition-colors">
+                        Debugging de Agentes en Local
+                    </h3>
+                    <p class="text-xs text-zinc-400 leading-relaxed line-clamp-3 mb-4">
+                        Herramientas imprescindibles para inspeccionar el tráfico entre Claude Desktop y tu servidor local.
+                    </p>
+                    <div class="mt-auto flex items-center gap-2 pt-2 border-t border-white/5">
+                        <span class="text-[10px] text-zinc-500">Lectura: 6 min</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Article 5 -->
+            <a href="#" class="group flex flex-col h-full bg-zinc-900/20 border border-white/5 hover:border-white/10 rounded-xl overflow-hidden transition-all hover:bg-zinc-900/40">
+                <div class="h-40 bg-zinc-900/50 relative overflow-hidden border-b border-white/5 flex items-center justify-center">
+                    <div class="flex items-end gap-1">
+                        <div class="w-2 h-4 bg-zinc-700 rounded-sm"></div>
+                        <div class="w-2 h-6 bg-zinc-600 rounded-sm"></div>
+                        <div class="w-2 h-10 bg-zinc-500 rounded-sm"></div>
+                        <div class="w-2 h-8 bg-zinc-600 rounded-sm"></div>
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1 gap-3">
+                    <div class="flex items-center gap-2 text-[10px] font-mono text-zinc-500">
+                        <span class="text-zinc-400">Negocio</span>
+                        <span>•</span>
+                        <span>01 Oct</span>
+                    </div>
+                    <h3 class="text-base font-medium text-white group-hover:text-zinc-200 transition-colors">
+                        El ROI de implementar Agentes
+                    </h3>
+                    <p class="text-xs text-zinc-400 leading-relaxed line-clamp-3 mb-4">
+                        Análisis de métricas reales tras la implementación de interfaces de IA conversacional en productos SaaS B2B.
+                    </p>
+                    <div class="mt-auto flex items-center gap-2 pt-2 border-t border-white/5">
+                        <span class="text-[10px] text-zinc-500">Lectura: 10 min</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Newsletter Box -->
+            <div class="relative flex flex-col justify-center h-full bg-zinc-900 rounded-xl border border-white/10 p-6 overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl"></div>
+                
+                <div class="relative z-10">
+                    <div class="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center mb-4">
+                        <i data-lucide="mail" class="w-4 h-4 text-white"></i>
+                    </div>
+                    <h3 class="text-base font-medium text-white mb-2">Weekly Engineering</h3>
+                    <p class="text-xs text-zinc-400 mb-4">Recibe un resumen semanal de las mejores prácticas y nuevos estándares MCP.</p>
+                    
+                    <form class="flex flex-col gap-2">
+                        <input type="email" placeholder="tu@email.com" class="bg-zinc-950 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:border-emerald-500/50 focus:outline-none transition-colors">
+                        <button type="submit" class="bg-white text-zinc-950 text-xs font-semibold py-2 rounded-lg hover:bg-zinc-200 transition-colors">
+                            Suscribirse
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="flex justify-center pt-8">
+            <button class="text-xs text-zinc-500 hover:text-white transition-colors flex items-center gap-2 border-b border-transparent hover:border-zinc-500 pb-0.5">
+                Ver archivo completo
+                <i data-lucide="arrow-right" class="w-3 h-3"></i>
+            </button>
+        </div>
+
+      </main>
+
+      <!-- Footer (Consistent) -->
+      <footer class="border-t border-white/5 pt-8 pb-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex flex-col gap-2 text-center md:text-left">
+          <div class="flex items-center justify-center md:justify-start gap-2">
+            <div class="w-5 h-5 bg-zinc-800 rounded-sm flex items-center justify-center">
+              <div class="w-1.5 h-1.5 bg-zinc-400 rounded-full"></div>
+            </div>
+            <span class="text-xs font-semibold text-zinc-300">
+              Agentia Inc.
+            </span>
+          </div>
+          <p class="text-[10px] text-zinc-500">
+            Habilitando interoperabilidad para la era de la IA.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-6">
+          <a href="#" class="text-[10px] text-zinc-500 hover:text-white transition-colors uppercase tracking-wider font-medium">
+            Soluciones
+          </a>
+          <a href="#" class="text-[10px] text-zinc-500 hover:text-white transition-colors uppercase tracking-wider font-medium">
+            Estándares
+          </a>
+          <a href="#" class="text-[10px] text-zinc-500 hover:text-white transition-colors uppercase tracking-wider font-medium">
+            Github
+          </a>
+          <a href="#" class="text-[10px] text-zinc-500 hover:text-white transition-colors uppercase tracking-wider font-medium">
+            Privacidad
+          </a>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Floating Chat Component (Same as before) -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 font-sans">
+      <div id="widget-window" class="hidden w-[340px] h-[450px] bg-zinc-900/90 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl flex-col animate-slide-up origin-bottom-right overflow-hidden mb-2 transition-all duration-300">
+        <!-- View: Login -->
+        <div id="view-login" class="flex flex-col h-full p-6">
+          <div class="flex items-center gap-2 mb-6">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center shadow-lg">
+              <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+            </div>
+            <div>
+              <h3 class="text-white font-medium text-sm leading-tight">
+                Agente IA
+              </h3>
+              <p class="text-zinc-500 text-[10px]">
+                Identifícate para comenzar
+              </p>
+            </div>
+          </div>
+          <div class="space-y-4 flex-1">
+            <div class="space-y-1.5">
+              <label class="text-[10px] text-zinc-500 font-medium uppercase tracking-wider pl-1">
+                Nombre Completo
+              </label>
+              <div class="relative">
+                <input type="text" id="input-name" class="w-full bg-zinc-950/50 border border-white/10 rounded-xl px-4 py-2.5 pl-9 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-emerald-500/50 transition-all" placeholder="Ej. Juan Pérez">
+                <i data-lucide="user" class="absolute left-3 top-2.5 w-3.5 h-3.5 text-zinc-600"></i>
+              </div>
+            </div>
+            
+            <div class="pt-4">
+               <p class="text-[10px] text-zinc-500 mb-2">¿Tienes dudas sobre un artículo?</p>
+            </div>
+          </div>
+          <button onclick="startInteraction()" class="w-full bg-white text-zinc-950 font-semibold py-3 rounded-xl hover:bg-zinc-200 transition-all text-xs flex items-center justify-center gap-2 shadow-lg shadow-white/5 group">
+            <span>Iniciar Sesión</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"></i>
+          </button>
+        </div>
+
+        <!-- View: Chat -->
+        <div id="view-chat" class="hidden flex-col h-full">
+          <div class="flex items-center justify-between p-4 border-b border-white/5 bg-white/5">
+            <div class="flex items-center gap-3">
+              <div class="relative">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center">
+                  <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                </div>
+                <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-zinc-900 rounded-full"></div>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-white">
+                  Asistente MCP
+                </span>
+                <span class="text-[10px] text-zinc-400">En línea ahora</span>
+              </div>
+            </div>
+            <button onclick="resetView()" class="text-zinc-500 hover:text-white transition-colors">
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <div class="flex-1 p-4 overflow-y-auto custom-scroll space-y-4">
+            <div class="flex gap-3">
+              <div class="flex flex-col gap-1 max-w-[85%]">
+                <div class="bg-white/5 border border-white/5 p-3 rounded-2xl rounded-tl-sm text-xs text-zinc-300 leading-relaxed">
+                  Hola <span id="chat-user-name" class="font-medium text-emerald-400"></span>. ¿Buscas algún tema técnico en específico hoy?
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-3 border-t border-white/5 bg-zinc-900/50">
+            <div class="relative flex items-center">
+              <input type="text" placeholder="Preguntar sobre un artículo..." class="w-full bg-zinc-950 border border-white/10 rounded-full pl-4 pr-10 py-2.5 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-emerald-500/50 transition-colors">
+              <button class="absolute right-1.5 p-1.5 bg-emerald-500 rounded-full text-zinc-950 hover:bg-emerald-400 transition-colors">
+                <i data-lucide="arrow-up" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="toggleWidget()" class="h-14 w-14 rounded-full bg-white text-zinc-950 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-105 transition-transform flex items-center justify-center relative group z-50">
+        <i data-lucide="message-square" class="w-6 h-6 fill-zinc-950 group-hover:scale-110 transition-transform duration-300"></i>
+      </button>
+
+      <script>
+        const widgetWindow = document.getElementById('widget-window');
+        const loginView = document.getElementById('view-login');
+        const chatView = document.getElementById('view-chat');
+
+        function toggleWidget() {
+            if (widgetWindow.classList.contains('hidden')) {
+                widgetWindow.classList.remove('hidden');
+                widgetWindow.classList.add('flex');
+            } else {
+                widgetWindow.classList.add('hidden');
+                widgetWindow.classList.remove('flex');
+            }
+        }
+
+        function startInteraction() {
+          const name = document.getElementById('input-name').value;
+          if(!name) {
+            document.getElementById('input-name').focus();
+            return;
+          }
+          document.getElementById('chat-user-name').innerText = name.split(' ')[0];
+          loginView.classList.add('hidden');
+          chatView.classList.remove('hidden');
+          chatView.classList.add('flex');
+        }
+
+        function resetView() {
+          toggleWidget();
+        }
+      </script>
+    </div>
+
+    <script>
+      lucide.createIcons();
+    </script>
+  
+</body></html>

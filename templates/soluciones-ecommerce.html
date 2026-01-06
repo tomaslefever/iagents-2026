@@ -1,0 +1,485 @@
+<html lang="es" class="dark"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentia Commerce - Automatización para E-commerce</title>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+darkMode: 'class',
+theme: {
+extend: {
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+mono: ['JetBrains Mono', 'monospace'],
+},
+colors: {
+zinc: {
+850: '#1f1f22',
+900: '#18181b',
+950: '#09090b',
+},
+indigo: {
+450: '#818cf8',
+500: '#6366f1',
+550: '#4f46e5',
+600: '#4338ca',
+},
+blue: {
+450: '#60a5fa',
+550: '#3b82f6',
+}
+},
+animation: {
+'fade-in': 'fadeIn 0.8s ease-out forwards',
+'float': 'float 6s ease-in-out infinite',
+'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+},
+keyframes: {
+fadeIn: {
+'0%': { opacity: '0', transform: 'translateY(10px)' },
+'100%': { opacity: '1', transform: 'translateY(0)' },
+},
+float: {
+'0%, 100%': { transform: 'translateY(0)' },
+'50%': { transform: 'translateY(-10px)' },
+},
+}
+}
+}
+}
+</script>
+<!-- Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+.custom-scroll::-webkit-scrollbar {
+width: 4px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+background: transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+background-color: #3f3f46;
+border-radius: 20px;
+}
+.grid-bg {
+background-size: 40px 40px;
+background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+.glass-card {
+background: rgba(24, 24, 27, 0.7);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.gradient-text {
+background: linear-gradient(to right, #ffffff, #a5b4fc);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+/* Chat Bubble Animations */
+.chat-bubble {
+opacity: 0;
+animation: slideIn 0.5s ease-out forwards;
+}
+@keyframes slideIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.product-card-img {
+mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+</style></head>
+  <body class="bg-zinc-950 text-zinc-300 font-sans min-h-screen flex flex-col items-center selection:bg-indigo-500/30 overflow-x-hidden">
+    
+    <!-- Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      <div class="absolute -top-[10%] left-[20%] w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-[100px] opacity-20"></div>
+      <div class="absolute bottom-[0%] right-[0%] w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[100px] opacity-10"></div>
+      <div class="absolute inset-0 grid-bg opacity-40"></div>
+    </div>
+
+    <!-- Wrapper -->
+    <div class="w-full max-w-[1200px] flex flex-col relative z-10 px-6">
+      
+      <!-- Navbar -->
+      <header class="flex items-center justify-between py-6 animate-fade-in">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-blue-600 rounded flex items-center justify-center shadow-lg shadow-indigo-900/20">
+            <i data-lucide="shopping-bag" class="w-4 h-4 text-white stroke-[2.5px]"></i>
+          </div>
+          <span class="font-semibold tracking-tight text-white text-sm">Agentia <span class="text-zinc-500 font-normal">Commerce</span></span>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-8 text-xs font-medium text-zinc-400">
+          <a href="#" class="hover:text-white transition-colors">Integraciones</a>
+          <a href="#" class="hover:text-white transition-colors">Recuperación</a>
+          <a href="#" class="hover:text-white transition-colors">Precios</a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+          <button class="text-xs font-medium text-zinc-400 hover:text-white transition-colors hidden sm:block">Login</button>
+          <button class="bg-white text-zinc-950 text-xs px-4 py-2 rounded-full font-semibold hover:bg-zinc-200 transition-colors shadow-lg shadow-white/5">
+            Comenzar Gratis
+          </button>
+        </div>
+      </header>
+
+      <!-- Hero Section -->
+      <main class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center py-16 lg:py-24">
+        
+        <!-- Hero Content -->
+        <div class="flex flex-col animate-fade-in">
+          <div class="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-indigo-400 text-[10px] mb-8 uppercase tracking-widest font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
+            Soporte &amp; Ventas AI para Ecommerce
+          </div>
+
+          <h1 class="font-medium text-4xl lg:text-6xl text-white tracking-tight leading-[1.1] mb-6">
+            Recupera carritos y gestiona devoluciones
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-400">en piloto automático.</span>
+          </h1>
+
+          <p class="text-sm text-zinc-400 leading-relaxed mb-8 max-w-lg">
+            Deja de perder ventas por no responder a tiempo. Nuestra IA recupera el 25% de los carritos abandonados por WhatsApp, recomienda productos complementarios y automatiza cambios y devoluciones.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <button class="flex items-center justify-center gap-2 bg-indigo-600 text-white px-6 py-3.5 rounded-lg text-xs font-bold hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-500/20 w-full sm:w-auto">
+              <span>Instalar en mi Tienda</span>
+              <i data-lucide="store" class="w-4 h-4"></i>
+            </button>
+            <div class="flex items-center gap-2 px-4 py-2">
+                <div class="flex -space-x-2">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&amp;fit=crop&amp;w=100&amp;h=100&amp;q=80" class="w-8 h-8 rounded-full border-2 border-zinc-950 object-cover" alt="User">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&amp;fit=crop&amp;w=100&amp;h=100&amp;q=80" class="w-8 h-8 rounded-full border-2 border-zinc-950 object-cover" alt="User">
+                    <div class="w-8 h-8 rounded-full border-2 border-zinc-950 bg-zinc-800 flex items-center justify-center text-[10px] text-white">4k+</div>
+                </div>
+                <div class="text-[10px] text-zinc-500 leading-tight">
+                    <span class="text-white font-medium block">Tiendas conectadas</span>
+                    Shopify, Woo, Tiendanube
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual: Automated Flow -->
+        <div class="relative lg:h-[600px] flex items-center justify-center animate-fade-in" style="animation-delay: 0.2s">
+            <!-- Decorative blurred circle -->
+            <div class="absolute inset-0 bg-indigo-500/10 blur-3xl rounded-full scale-75 opacity-50 pointer-events-none"></div>
+            
+            <!-- Phone/Interface Container -->
+            <div class="relative w-[320px] bg-zinc-950 rounded-[3rem] border-4 border-zinc-900 shadow-2xl overflow-hidden animate-float">
+                <!-- Status Bar -->
+                <div class="h-6 bg-zinc-950 w-full flex items-center justify-between px-6 pt-2">
+                    <span class="text-[10px] text-white font-medium">19:20</span>
+                    <div class="flex gap-1">
+                        <div class="w-3 h-3 text-white"><i data-lucide="wifi" class="w-3 h-3"></i></div>
+                        <div class="w-3 h-3 text-white"><i data-lucide="battery" class="w-3 h-3"></i></div>
+                    </div>
+                </div>
+                
+                <!-- Chat Header -->
+                <div class="bg-zinc-900/80 backdrop-blur p-4 flex items-center gap-3 border-b border-white/5">
+                    <div class="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center relative">
+                        <i data-lucide="shopping-cart" class="w-4 h-4 text-white"></i>
+                        <div class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-zinc-900"></div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-white">Soporte Tienda</div>
+                        <div class="text-[9px] text-indigo-400">Detectó carrito abandonado</div>
+                    </div>
+                </div>
+
+                <!-- Chat Body -->
+                <div class="p-4 flex flex-col gap-3 h-[400px] bg-zinc-950 overflow-hidden relative">
+                    <div class="absolute inset-0 opacity-20" style="background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');"></div>
+                    
+                    <!-- Message 1: Cart Recovery -->
+                    <div class="self-start max-w-[85%] bg-zinc-800 rounded-2xl rounded-tl-sm p-3 border border-zinc-700 z-10 chat-bubble" style="animation-delay: 0.5s">
+                        <p class="text-[11px] text-zinc-200 leading-relaxed">¡Hola Carlos! 👋 Vimos que dejaste estas zapatillas en tu carrito. ¿Tuviste algún problema?</p>
+                    </div>
+
+                    <!-- Message 2: Product Card -->
+                    <div class="self-start max-w-[70%] bg-zinc-800 rounded-xl overflow-hidden border border-zinc-700 z-10 chat-bubble shadow-lg" style="animation-delay: 1.0s">
+                        <div class="h-24 w-full bg-zinc-700 relative">
+                             <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&amp;fit=crop&amp;w=500&amp;q=80" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-2">
+                             <div class="text-[10px] font-bold text-white">Nike Air Max Red</div>
+                             <div class="text-[10px] text-zinc-400">$120.00 USD</div>
+                        </div>
+                    </div>
+
+                    <!-- Message 3: User Reply -->
+                    <div class="self-end max-w-[85%] bg-indigo-600 rounded-2xl rounded-tr-sm p-3 shadow-sm z-10 chat-bubble" style="animation-delay: 2.2s">
+                        <p class="text-[11px] text-white leading-relaxed">No estoy seguro si la talla 42 me va a quedar bien.</p>
+                        <span class="text-[9px] text-indigo-200 block text-right mt-1">19:22</span>
+                    </div>
+
+                    <!-- Message 4: Bot Recommendation + Returns Policy -->
+                    <div class="self-start max-w-[85%] bg-zinc-800 rounded-2xl rounded-tl-sm p-3 border border-zinc-700 z-10 chat-bubble" style="animation-delay: 3.5s">
+                        <p class="text-[11px] text-zinc-200 leading-relaxed">Entiendo. Son "True to Size". Si no te quedan, gestionamos el cambio <strong>gratis</strong> al instante. 🚚</p>
+                         <div class="mt-2 pt-2 border-t border-white/5">
+                             <button class="w-full py-1.5 rounded bg-indigo-500/20 text-indigo-300 text-[10px] font-medium hover:bg-indigo-500/30 transition-colors">Finalizar Compra con 5% OFF</button>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="p-3 bg-zinc-900 border-t border-white/5 flex items-center gap-2">
+                    <div class="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-500"><i data-lucide="paperclip" class="w-3.5 h-3.5"></i></div>
+                    <div class="flex-1 h-8 bg-zinc-950 rounded-full border border-zinc-800 px-3 flex items-center text-[10px] text-zinc-500">Escribe...</div>
+                    <div class="w-6 h-6 text-indigo-500"><i data-lucide="send" class="w-4 h-4"></i></div>
+                </div>
+            </div>
+
+            <!-- Floating Notification Card -->
+            <div class="absolute bottom-24 -left-4 lg:-left-12 glass-card p-3 rounded-xl flex items-center gap-3 animate-pulse-slow shadow-xl max-w-[200px]">
+                <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 shrink-0">
+                    <i data-lucide="banknote" class="w-4 h-4"></i>
+                </div>
+                <div>
+                    <div class="text-xs font-medium text-white">Venta Recuperada</div>
+                    <div class="text-[10px] text-zinc-400">Hace 2 minutos • $114.00</div>
+                </div>
+            </div>
+        </div>
+      </main>
+
+      <!-- Integrations Logos -->
+      <section class="border-y border-white/5 py-10">
+        <p class="text-center text-[10px] uppercase tracking-widest text-zinc-600 mb-8 font-medium">Integración nativa en 1 click con</p>
+        <div class="flex flex-wrap justify-center gap-10 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+           <!-- Mock Logos tailored for Ecommerce -->
+           <div class="flex items-center gap-2 font-bold text-lg text-white"><i data-lucide="shopping-bag" class="w-5 h-5 text-green-400"></i> shopify</div>
+           <div class="flex items-center gap-2 font-bold text-lg text-white"><i data-lucide="package" class="w-5 h-5 text-purple-400"></i> WooCommerce</div>
+           <div class="flex items-center gap-2 font-bold text-lg text-white"><i data-lucide="cloud" class="w-5 h-5 text-blue-400"></i> tiendanube</div>
+           <div class="flex items-center gap-2 font-bold text-lg text-white"><i data-lucide="layers" class="w-5 h-5 text-pink-500"></i> VTEX</div>
+           <div class="flex items-center gap-2 font-bold text-lg text-white"><i data-lucide="box" class="w-5 h-5 text-orange-500"></i> Magento</div>
+        </div>
+      </section>
+
+      <!-- Feature Section: Post-Sales & Returns -->
+      <section class="py-20">
+         <div class="grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Image Placeholder: Dashboard/Logistics -->
+            <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                <div class="relative rounded-2xl overflow-hidden border border-white/10 aspect-[4/3] bg-zinc-900">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="E-commerce Dashboard" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition duration-700 ease-out">
+                    <!-- Overlay Info -->
+                    <div class="absolute bottom-6 left-6 right-6">
+                         <div class="glass-card p-4 rounded-lg border border-white/10">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs text-zinc-400">Tickets Resueltos Hoy</span>
+                                <span class="text-xs text-green-400 font-mono">+12%</span>
+                            </div>
+                            <div class="w-full bg-zinc-800 h-1.5 rounded-full mb-3 overflow-hidden">
+                                <div class="bg-indigo-500 w-[85%] h-full rounded-full"></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <span class="px-2 py-0.5 rounded bg-zinc-800 text-[9px] text-zinc-300">📦 Estado Pedido</span>
+                                <span class="px-2 py-0.5 rounded bg-zinc-800 text-[9px] text-zinc-300">↩️ Devolución</span>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copy -->
+            <div>
+                <h2 class="text-2xl md:text-3xl font-medium text-white mb-6 tracking-tight">
+                    Transforma la post-venta <br>
+                    <span class="text-zinc-500">de un costo a una oportunidad.</span>
+                </h2>
+                <p class="text-sm text-zinc-400 mb-8 leading-relaxed">
+                    El 70% de los tickets de soporte son "¿Dónde está mi pedido?" o "¿Cómo hago un cambio?". Agentia resuelve esto automáticamente, liberando a tu equipo para casos complejos.
+                </p>
+
+                <ul class="space-y-6">
+                    <li class="flex gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center shrink-0 border border-indigo-500/20">
+                            <i data-lucide="refresh-ccw" class="w-4 h-4 text-indigo-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white mb-1">Gestión de Devoluciones (RMA)</h4>
+                            <p class="text-[11px] text-zinc-500 leading-relaxed">El cliente solicita cambio por WhatsApp, la IA valida las políticas, genera la etiqueta de envío y coordina la recolección sin intervención humana.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center shrink-0 border border-indigo-500/20">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-indigo-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white mb-1">Recomendación Inteligente (Upsell)</h4>
+                            <p class="text-[11px] text-zinc-500 leading-relaxed">Si compraron una cámara, la IA sugiere la tarjeta de memoria compatible y el estuche 3 días después. Aumenta el LTV del cliente.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center shrink-0 border border-indigo-500/20">
+                            <i data-lucide="truck" class="w-4 h-4 text-indigo-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white mb-1">Tracking Proactivo</h4>
+                            <p class="text-[11px] text-zinc-500 leading-relaxed">Notifica retrasos antes que el cliente se queje y ofrece compensaciones automáticas (cupones) para mantener la lealtad.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+         </div>
+      </section>
+
+      <!-- Features Grid -->
+      <section class="py-16">
+        <div class="text-center mb-16">
+            <h2 class="text-2xl font-medium text-white mb-3">Tu tienda, 24/7 en piloto automático</h2>
+            <p class="text-sm text-zinc-400">Funcionalidades diseñadas para escalar ventas.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Feature 1 -->
+            <div class="glass-card p-6 rounded-xl hover:border-indigo-500/30 transition-colors group">
+                <i data-lucide="shopping-cart" class="w-8 h-8 text-indigo-500 mb-4 group-hover:scale-110 transition-transform"></i>
+                <h3 class="text-white text-sm font-semibold mb-2">Recuperación de Carritos</h3>
+                <p class="text-xs text-zinc-400 leading-relaxed">
+                    Envía recordatorios hiper-personalizados por WhatsApp. "Hey Juan, te guardamos tu camisa azul". Tasa de apertura del 98%.
+                </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="glass-card p-6 rounded-xl hover:border-blue-500/30 transition-colors group">
+                <i data-lucide="message-square-heart" class="w-8 h-8 text-blue-500 mb-4 group-hover:scale-110 transition-transform"></i>
+                <h3 class="text-white text-sm font-semibold mb-2">Asesor de Compras AI</h3>
+                <p class="text-xs text-zinc-400 leading-relaxed">
+                    Responde dudas de tallas, materiales y stock en tiempo real. Guía al cliente hasta el checkout como un vendedor en tienda física.
+                </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="glass-card p-6 rounded-xl hover:border-cyan-500/30 transition-colors group">
+                <i data-lucide="arrow-left-right" class="w-8 h-8 text-cyan-500 mb-4 group-hover:scale-110 transition-transform"></i>
+                <h3 class="text-white text-sm font-semibold mb-2">Cambios Automáticos</h3>
+                <p class="text-xs text-zinc-400 leading-relaxed">
+                    Portal de autogestión y chat para devoluciones. Reduce costos logísticos validando fotos del producto antes de aprobar.
+                </p>
+            </div>
+        </div>
+      </section>
+
+      <!-- Comparison Visual -->
+      <section class="py-16 border-t border-white/5">
+        <div class="grid lg:grid-cols-2 gap-8 bg-zinc-900/50 rounded-2xl border border-white/5 overflow-hidden">
+            <!-- Left: Traditional Way -->
+            <div class="p-8 border-r border-white/5 relative overflow-hidden">
+                <div class="absolute top-4 right-4 text-[10px] uppercase font-bold text-red-500 tracking-wider">Ecommerce Tradicional</div>
+                <h3 class="text-white font-medium mb-6">Proceso Manual y Lento</h3>
+                <div class="space-y-4 opacity-50">
+                    <div class="flex items-center gap-3 text-xs text-zinc-400">
+                        <i data-lucide="x-circle" class="w-4 h-4 text-red-500"></i>
+                        <span>Email de "Carrito Abandonado" (Spam)</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs text-zinc-400">
+                        <i data-lucide="x-circle" class="w-4 h-4 text-red-500"></i>
+                        <span>Soporte solo Lu-Vi, 9 a 18h</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs text-zinc-400">
+                        <i data-lucide="x-circle" class="w-4 h-4 text-red-500"></i>
+                        <span>Devoluciones tardan 5 días en aprobarse</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs text-zinc-400">
+                        <i data-lucide="x-circle" class="w-4 h-4 text-red-500"></i>
+                        <span>Sin recomendaciones post-compra</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: AI Way -->
+            <div class="p-8 relative overflow-hidden bg-indigo-900/5">
+                <div class="absolute top-4 right-4 text-[10px] uppercase font-bold text-indigo-500 tracking-wider">Con Agentia</div>
+                <h3 class="text-white font-medium mb-6">Commerce Automatizado</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3 text-xs text-white">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-500"></i>
+                        <span>WhatsApp Personalizado (98% Open Rate)</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs text-white">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-500"></i>
+                        <span>Respuestas Instantáneas 24/7</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs text-white">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-500"></i>
+                        <span>Aprobación de cambios en segundos</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs text-white">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-500"></i>
+                        <span>Upsell inteligente automatizado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-zinc-950/80 z-10 pointer-events-none"></div>
+        <div class="relative rounded-2xl overflow-hidden border border-white/10 h-[400px]">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" alt="Happy Customer" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/70 z-10 flex flex-col items-center justify-center text-center p-6">
+                <h2 class="text-3xl font-medium text-white mb-4">Aumenta tu conversión en 30 días.</h2>
+                <p class="text-sm text-zinc-300 max-w-md mb-8">
+                    Sin tarjetas de crédito. Prueba la integración con Shopify o Tiendanube gratis por 14 días.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 w-full max-w-md">
+                    <input type="text" placeholder="midominio.myshopify.com" class="bg-white/10 border border-white/20 rounded px-4 py-3 text-xs text-white placeholder-zinc-400 focus:outline-none focus:border-indigo-500 flex-1 backdrop-blur-sm">
+                    <button class="bg-indigo-600 text-white px-6 py-3 rounded font-bold text-xs hover:bg-indigo-500 transition-colors whitespace-nowrap shadow-lg shadow-indigo-600/30">
+                        Conectar Tienda
+                    </button>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="py-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-zinc-500">
+        <div class="flex flex-col gap-2">
+            <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-zinc-800 rounded flex items-center justify-center">
+                    <div class="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                </div>
+                <span class="text-zinc-300 font-medium">Agentia Commerce</span>
+            </div>
+            <p>© 2024 Agentia Technologies.</p>
+        </div>
+        
+        <div class="flex gap-8">
+            <div class="flex flex-col gap-2">
+                <span class="text-white font-medium mb-1">Plataforma</span>
+                <a href="#" class="hover:text-indigo-400 transition-colors">Shopify App</a>
+                <a href="#" class="hover:text-indigo-400 transition-colors">Woo Plugin</a>
+                <a href="#" class="hover:text-indigo-400 transition-colors">API</a>
+            </div>
+            <div class="flex flex-col gap-2">
+                <span class="text-white font-medium mb-1">Recursos</span>
+                <a href="#" class="hover:text-indigo-400 transition-colors">Casos de Éxito</a>
+                <a href="#" class="hover:text-indigo-400 transition-colors">Blog</a>
+            </div>
+            <div class="flex flex-col gap-2">
+                <span class="text-white font-medium mb-1">Legal</span>
+                <a href="#" class="hover:text-indigo-400 transition-colors">Privacidad</a>
+                <a href="#" class="hover:text-indigo-400 transition-colors">Términos</a>
+            </div>
+        </div>
+      </footer>
+
+    </div>
+
+    <script>
+      lucide.createIcons();
+    </script>
+  
+</body></html>
