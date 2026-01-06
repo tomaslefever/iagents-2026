@@ -50,9 +50,7 @@ export default function Header() {
       >
         <div className="p-4 border-b border-white/5 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-zinc-100 rounded-sm flex items-center justify-center">
-              <div className="w-2 h-2 bg-zinc-900 rounded-full"></div>
-            </div>
+            <Image src="/logo.png" alt="iAgents" width={24} height={24} className="w-6 h-6" />
             <span className="font-semibold tracking-tight text-white text-sm">iAgents</span>
           </div>
           <button onClick={toggleMobileMenu} className="p-2 text-zinc-400 hover:text-white">
@@ -117,7 +115,7 @@ export default function Header() {
 
         <div className="flex items-center gap-3">
 
-          <div className="hidden md:block">
+          <div>
             <LoginButton />
           </div>
         </div>

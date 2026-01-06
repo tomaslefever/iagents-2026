@@ -68,7 +68,7 @@ export default function EnterprisePage() {
             <OrbitBackground />
 
             {/* Hero Section */}
-            <main className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center py-16 lg:py-24">
+            <main className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center pt-40 pb-16 lg:py-24">
                 {/* Hero Content */}
                 <div className="flex flex-col animate-fade-in">
                     <div className="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-orange-400 text-[10px] mb-8 uppercase tracking-widest font-semibold">

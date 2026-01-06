@@ -72,7 +72,7 @@ export default function InmobiliariaPage() {
             <OrbitBackground />
 
             {/* Hero Section */}
-            <main className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center py-16 lg:py-24">
+            <main className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center pt-40 pb-16 lg:py-24">
 
                 {/* Hero Content */}
                 <div className="flex flex-col animate-fade-in">
