@@ -6,15 +6,17 @@ interface LeadGenerationProps {
     backgroundImage?: string
     title?: string
     subtitle?: string
+    id?: string
 }
 
 export default function LeadGeneration({
     backgroundImage = '/img/default-bg.jpg', // Fallback or required? User said "Debe tener una imagen de fondo como propiedad"
     title = "Acelera tus ventas hoy",
-    subtitle = "Implementación en 48 horas. Conecta tu WhatsApp y empieza a recibir visitas calificadas."
+    subtitle = "Implementación en 48 horas. Conecta tu WhatsApp y empieza a recibir visitas calificadas.",
+    id
 }: LeadGenerationProps) {
     return (
-        <section className="py-24 relative rounded-3xl border border-white/10 overflow-hidden w-full">
+        <section id={id} className="py-24 relative rounded-3xl border border-white/10 overflow-hidden w-full">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-zinc-900/80 z-10"></div> {/* Overlay for readability */}

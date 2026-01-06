@@ -18,6 +18,7 @@ export default function PricingPage() {
                 <PricingComparisonTable frequency={frequency} />
 
                 <LeadGeneration
+                    id="contact-form"
                     backgroundImage="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1000&auto=format&fit=crop"
                     title="¿Necesitas un plan a medida?"
                     subtitle="Hablemos sobre tus necesidades específicas y diseñemos una solución para ti."

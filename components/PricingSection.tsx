@@ -68,6 +68,23 @@ const tiers = [
 
 export default function PricingSection({ frequency, setFrequency }: { frequency: any, setFrequency: (f: any) => void }) {
 
+    const handlePlanSelect = (tier: any) => {
+        if (tier.id === 'enterprise') {
+            document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })
+            return
+        }
+
+        const cartItem = {
+            id: tier.id,
+            name: tier.name,
+            price: tier.price[frequency.value],
+            frequency: frequency.value,
+        }
+
+        localStorage.setItem('iagents_cart', JSON.stringify(cartItem))
+        window.location.href = 'https://dashboard.iagents.pro'
+    }
+
     return (
         <section className="py-24 relative overflow-hidden" id="pricing">
             {/* Background Decoration */}
@@ -177,10 +194,10 @@ export default function PricingSection({ frequency, setFrequency }: { frequency:
                                 ))}
                             </ul>
 
-                            <a
-                                href={tier.href}
+                            <button
+                                onClick={() => handlePlanSelect(tier)}
                                 className={`
-                  mt-8 block rounded-md px-3 py-2.5 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-all
+                  mt-8 block w-full rounded-md px-3 py-2.5 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-all
                   ${tier.featured
                                         ? 'bg-indigo-500 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline-indigo-500'
                                         : 'bg-white/10 text-white hover:bg-white/20 focus-visible:outline-white'
@@ -188,7 +205,7 @@ export default function PricingSection({ frequency, setFrequency }: { frequency:
                 `}
                             >
                                 {tier.cta}
-                            </a>
+                            </button>
                         </div>
                     ))}
                 </div>
