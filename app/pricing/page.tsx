@@ -12,7 +12,6 @@ export default function PricingPage() {
 
     return (
         <div className="min-h-screen text-white selection:bg-indigo-500/30 pt-20 relative">
-            <OrbitBackground />
             <main className="relative z-10 w-full flex flex-col items-center">
                 <PricingSection frequency={frequency} setFrequency={setFrequency} />
                 <PricingComparisonTable frequency={frequency} />

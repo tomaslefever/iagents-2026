@@ -88,7 +88,6 @@ export default function HeroSection() {
     <main className="grid lg:grid-cols-12 gap-6 lg:gap-12 items-center lg:pt-40 py-32 lg:py-32 relative z-10">
       {/* Background - Full screen width breakout */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-screen h-full -z-10 overflow-hidden pointer-events-none">
-        <HomeBackground />
         <div className="absolute bottom-0 w-full h-96 bg-gradient-to-t from-zinc-950 to-transparent z-10"></div>
       </div>
 

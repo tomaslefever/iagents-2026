@@ -70,7 +70,6 @@ export default function EcommercePage() {
         <div className="w-full flex flex-col relative z-10">
 
             {/* Background Elements */}
-            <OrbitBackground />
 
             {/* Hero Section */}
             <main className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center pt-40 pb-16 lg:py-24">
