@@ -1,88 +1,30 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
-import { MoreHorizontal } from 'lucide-react'
+import { MoreHorizontal, Wifi, Battery, Bot, Plus, Send, Check } from 'lucide-react'
 import CTAButton from '@/components/CTAButton'
 import HomeBackground from './HomeBackground'
 
 export default function HeroSection() {
   const chatContainerRef = useRef<HTMLDivElement>(null)
+  const [interactionStep, setInteractionStep] = useState(0)
 
-  // Real Chat State
-  const [messages, setMessages] = useState<any[]>([
-    { id: 'welcome', sender: 'agent', text: 'Hola, soy Sofía de iAgents, estoy para asistirte en la implementación de IA en tu negocio. Primero dime cómo te llamas y de qué se trata tu empresa o negocio?', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }
-  ])
-  const [inputValue, setInputValue] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [sessionId, setSessionId] = useState('')
-
+  // Sequence timer
   useEffect(() => {
-    // Generate simple session ID on mount
-    setSessionId(Math.random().toString(36).substring(7))
-  }, [])
+    if (interactionStep < 5) {
+      const timer = setTimeout(() => {
+        setInteractionStep(prev => prev + 1)
+      }, interactionStep === 0 ? 1000 : 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [interactionStep])
 
+  // Auto-scroll on new messages
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTo({
-        top: chatContainerRef.current.scrollHeight,
-        behavior: 'smooth',
-      })
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
     }
-  }, [messages, isLoading])
-
-  const handleSendMessage = async () => {
-    if (!inputValue.trim() || isLoading) return
-
-    const userMsg = {
-      id: Date.now().toString(),
-      sender: 'lead',
-      text: inputValue,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    }
-
-    setMessages(prev => [...prev, userMsg])
-    setInputValue('')
-    setIsLoading(true)
-
-    try {
-      const response = await fetch('https://iagents-n8n.98uxik.easypanel.host/webhook/9dc47195-d9fa-4e4d-b1f7-a265f0f091d1', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: userMsg.text,
-          sessionId: sessionId
-        })
-      })
-
-      const data = await response.json()
-
-      const agentMsg = {
-        id: (Date.now() + 1).toString(),
-        sender: 'agent',
-        text: data.output || 'Lo siento, hubo un error al procesar tu mensaje.',
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      }
-
-      setMessages(prev => [...prev, agentMsg])
-    } catch (error) {
-      console.error('Chat error:', error)
-      const errorMsg = {
-        id: (Date.now() + 1).toString(),
-        sender: 'agent',
-        text: 'Lo siento, no pude conectar con el servidor. Por favor intenta de nuevo.',
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      }
-      setMessages(prev => [...prev, errorMsg])
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSendMessage()
-    }
-  }
+  }, [interactionStep])
 
   return (
     <main className="grid lg:grid-cols-12 gap-6 lg:gap-12 items-center lg:pt-40 py-32 lg:py-32 relative z-10">
@@ -92,8 +34,8 @@ export default function HeroSection() {
       </div>
 
       {/* Hero Copy */}
-      <div className="lg:col-span-5 flex flex-col justify-center">
-        <div className="inline-flex items-center gap-2 self-start px-2 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] mb-6 uppercase tracking-widest font-semibold">
+      <div className="lg:col-span-5 lg:-mt-24 flex flex-col justify-center animate-fade-in items-center lg:items-start text-center lg:text-left">
+        <div className="inline-flex items-center gap-2 self-center lg:self-start px-2 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] mb-6 uppercase tracking-widest font-semibold">
           <span className="relative flex h-1.5 w-1.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-indigo-500"></span>
@@ -112,7 +54,7 @@ export default function HeroSection() {
           operativos y aumenta la conversión sin intervención humana.
         </p>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 justify-center lg:justify-start">
           <CTAButton text="Probar ahora" />
           <div className="flex items-center gap-2 px-4 py-2 text-xs text-zinc-500">
             <svg
@@ -135,85 +77,117 @@ export default function HeroSection() {
       </div>
 
       {/* Hero Visual: Conversation & Logic */}
-      <div className="lg:col-span-7 relative">
-        {/* Decorative BG glow */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-blue-500/10 rounded-3xl blur-2xl"></div>
+      <div className="lg:col-span-7 relative h-[600px] flex items-center justify-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        {/* Decorative elements */}
+        <div className="absolute inset-0 bg-indigo-500/10 blur-3xl rounded-full scale-75 opacity-50 pointer-events-none"></div>
 
-        <div className="backdrop-blur-sm rounded-2xl overflow-hidden shadow-2xl relative animate-float flex flex-col max-h-[420px] h-[420px] border-zinc-800">
-          {/* Main Chat Interface */}
-          <div className="flex-1 flex flex-col bg-zinc-900/50 max-h-[420px] h-[420px]">
-            <div className="p-4 border-b border-white/5 flex items-center justify-between bg-zinc-900/80">
-              <div className="flex items-center gap-3">
-                <img src="/img/agent-profile.png" alt="Agente de Ventas" className="w-8 h-8 rounded-full" />
-                <div>
-                  <div className="text-xs text-white font-medium">Agente de Ventas</div>
-                  <div className="text-[10px] text-green-500 flex items-center gap-1">
-                    <div className="w-1 h-1 bg-green-500 rounded-full"></div>
-                    En línea
-                  </div>
-                </div>
+        {/* Phone Container */}
+        <div className="relative w-[320px] bg-zinc-950 rounded-[2rem] border-4 border-zinc-900 shadow-2xl overflow-hidden animate-float">
+          {/* Status Bar */}
+          <div className="h-6 bg-zinc-950 w-full flex items-center justify-between px-6 pt-2">
+            <span className="text-[10px] text-white font-medium">14:20</span>
+            <div className="flex gap-1">
+              <div className="w-3 h-3 text-white">
+                <Wifi className="w-3 h-3" />
               </div>
-              <MoreHorizontal className="text-zinc-500 w-4 h-4" />
+              <div className="w-3 h-3 text-white">
+                <Battery className="w-3 h-3" />
+              </div>
             </div>
+          </div>
 
-            {/* Chat Area */}
-            <div
-              id="hero-chat-messages"
-              ref={chatContainerRef}
-              className="flex-1 p-4 flex flex-col gap-4 overflow-y-scroll h-[300px] custom-scroll bg-zinc-950/30"
-            >
-              {messages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className={`hero-chat-msg max-w-[85%] flex flex-col ${msg.sender === 'agent' ? 'self-end items-end' : 'self-start items-start'}`}
-                >
-                  <div className={`${msg.sender === 'agent'
-                    ? 'bg-indigo-600 text-white px-3 py-2 rounded-2xl rounded-tr-none text-xs leading-relaxed shadow-lg shadow-indigo-900/20'
-                    : 'bg-zinc-800 text-zinc-200 px-3 py-2 rounded-2xl rounded-tl-none text-xs leading-relaxed border border-white/5'
-                    }`}>
-                    {msg.text}
-                  </div>
-                  <span className={`text-[9px] text-zinc-600 mt-1 ${msg.sender === 'agent' ? 'mr-1' : 'ml-1'}`}>
-                    {msg.time}
-                  </span>
+          {/* Chat Header */}
+          <div className="bg-zinc-900/80 backdrop-blur p-4 flex items-center gap-3 border-b border-white/5">
+            <img src="/img/agent-profile.png" alt="Sofía" className="w-8 h-8 rounded-full object-cover" />
+            <div>
+              <div className="text-xs font-medium text-white">
+                Sofía
+              </div>
+              <div className="text-[9px] text-indigo-400">
+                En línea • Soporte 24/7
+              </div>
+            </div>
+            <MoreHorizontal className="ml-auto text-zinc-500 w-4 h-4" />
+          </div>
+
+          {/* Chat Body */}
+          <div className="relative h-[400px] bg-zinc-950 overflow-hidden">
+            <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: "url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')" }}></div>
+            <div ref={chatContainerRef} className="absolute inset-0 p-4 flex flex-col gap-3 overflow-y-auto custom-scroll">
+
+              {/* Messages */}
+              {interactionStep >= 1 && (
+                <div className="self-end max-w-[85%] bg-indigo-600 rounded-2xl rounded-tr-sm p-3 shadow-sm z-10 chat-bubble animate-slide-in-right">
+                  <p className="text-[11px] text-white leading-relaxed">
+                    Hola, vi que ayudan a automatizar ventas. ¿Cómo funciona?
+                  </p>
                 </div>
-              ))}
+              )}
 
-              {isLoading && (
-                <div className="self-end max-w-[85%]">
-                  <div className="flex gap-1 items-center bg-indigo-600/10 border border-indigo-500/20 px-3 py-2 rounded-2xl rounded-tr-none">
-                    <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"></div>
-                    <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+              {interactionStep >= 2 && (
+                <div className="self-start max-w-[85%] bg-zinc-800 rounded-2xl rounded-tl-sm p-3 border border-zinc-700 z-10 chat-bubble animate-slide-in-left">
+                  <p className="text-[11px] text-zinc-200 leading-relaxed">
+                    ¡Hola! 🚀 Exacto. Me conecto a tu WhatsApp, califico leads en segundos y agendo reuniones solo con clientes reales.
+                  </p>
+                </div>
+              )}
+
+              {interactionStep >= 3 && (
+                <div className="self-end max-w-[85%] bg-indigo-600 rounded-2xl rounded-tr-sm p-3 shadow-sm z-10 chat-bubble animate-slide-in-right">
+                  <p className="text-[11px] text-white leading-relaxed">
+                    Suena bien. ¿Se integra con mi CRM?
+                  </p>
+                </div>
+              )}
+
+              {interactionStep >= 4 && (
+                <div className="self-start max-w-[85%] bg-zinc-800 rounded-2xl rounded-tl-sm p-3 border border-zinc-700 z-10 chat-bubble animate-slide-in-left">
+                  <p className="text-[11px] text-zinc-200 leading-relaxed">
+                    Sí, nativamente. Envíame tu web y te muestro una demo ahora mismo. 👇
+                  </p>
+                  <div className="mt-2 flex gap-2">
+                    <button className="bg-indigo-500/20 text-indigo-300 text-[10px] px-2 py-1 rounded border border-indigo-500/30">
+                      Ver Demo
+                    </button>
+                    <button className="bg-zinc-700 text-zinc-300 text-[10px] px-2 py-1 rounded">
+                      Precios
+                    </button>
                   </div>
                 </div>
               )}
             </div>
+          </div>
 
-            {/* Input area */}
-            <div className="p-3 border-t border-white/5 bg-zinc-900 flex items-center gap-2">
-              <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Escribe tu mensaje..."
-                className="flex-1 bg-zinc-800/50 border border-white/5 rounded-full px-4 py-2 text-xs text-white focus:outline-none focus:border-indigo-500/50 transition-colors placeholder-zinc-600"
-                disabled={isLoading}
-              />
-              <button
-                onClick={handleSendMessage}
-                disabled={isLoading || !inputValue.trim()}
-                className="p-2 bg-indigo-600 rounded-full text-white hover:bg-indigo-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m22 2-7 20-4-9-9-4Z" />
-                  <path d="M22 2 11 13" />
-                </svg>
-              </button>
+          {/* Input Area */}
+          <div className="p-3 bg-zinc-900 border-t border-white/5 flex items-center gap-2">
+            <div className="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-500">
+              <Plus className="w-4 h-4" />
+            </div>
+            <div className="flex-1 h-8 bg-zinc-950 rounded-full border border-zinc-800 px-3 flex items-center text-[10px] text-zinc-500">
+              Escribe un mensaje...
+            </div>
+            <div className="w-6 h-6 text-indigo-500">
+              <Send className="w-4 h-4" />
             </div>
           </div>
         </div>
+
+        {/* Floating Notification */}
+        {interactionStep >= 5 && (
+          <div className="absolute bottom-24 -right-8 glass-card p-3 rounded-xl flex items-center gap-3 animate-slide-up shadow-xl max-w-[200px] z-20 bg-zinc-900/90 border border-white/10 backdrop-blur-md">
+            <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+              <Check className="w-4 h-4 text-green-500" />
+            </div>
+            <div>
+              <div className="text-[11px] font-medium text-white">
+                Integración Detectada
+              </div>
+              <div className="text-[9px] text-zinc-400">
+                CRM sincronizado exitosamente
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </main>
   )

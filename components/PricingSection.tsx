@@ -17,7 +17,6 @@ const tiers = [
         description: 'Perfecto para startups y equipos pequeños que inician su automatización.',
         features: [
             '2 Agentes IA de texto',
-            '1 Agente IA de voz',
             'Integración WhatsApp',
             '1,000 conversaciones/mes',
             'Soporte por email 24/7',
@@ -35,7 +34,6 @@ const tiers = [
         description: 'Para empresas en expansión que necesitan escalar su operación comercial.',
         features: [
             '3 Agentes IA de texto',
-            '2 Agentes IA de voz',
             'Autoentrenamiento',
             'Integración WhatsApp',
             '5,000 conversaciones/mes',
@@ -43,6 +41,24 @@ const tiers = [
         ],
         featured: true,
         cta: 'Escalar Ahora',
+        href: '#'
+    },
+    {
+        name: 'Voice',
+        id: 'voice',
+        price: { monthly: '$390', annually: '$312' },
+        originalPrice: { monthly: '$490', annually: '$390' },
+        description: 'Plan exclusivo para automatización telefónica y de voz.',
+        features: [
+            '1 Agente IA de voz',
+            '1,000 minutos incluidos',
+            'Integración Telefonía',
+            'Dashboard de llamadas',
+            'Grabación de llamadas',
+            'Soporte prioritario'
+        ],
+        featured: false,
+        cta: 'Empezar con Voz',
         href: '#'
     },
     {
@@ -93,7 +109,7 @@ export default function PricingSection({ frequency, setFrequency }: { frequency:
                 <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px]"></div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div className="max-w-[90rem] mx-auto px-6 lg:px-8 relative z-10">
                 <div className="mx-auto max-w-4xl text-center mb-10">
                     <h2 className="text-base font-semibold leading-7 text-indigo-400">Pricing</h2>
                     <p className="mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl">
@@ -135,7 +151,7 @@ export default function PricingSection({ frequency, setFrequency }: { frequency:
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-8">
+                <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-8 max-w-5xl mx-auto">
                     {tiers.map((tier) => (
                         <div
                             key={tier.id}
@@ -159,7 +175,7 @@ export default function PricingSection({ frequency, setFrequency }: { frequency:
                                 <div className="mt-6 flex flex-col items-center justify-center">
                                     {/* @ts-ignore */}
                                     {tier.originalPrice[frequency.value] && (
-                                        <div className="hidden text-lg text-zinc-500 line-through decoration-zinc-600 mb-1 pointer-events-none">
+                                        <div className="text-lg text-zinc-500 line-through decoration-zinc-600 mb-1 pointer-events-none">
                                             {/* @ts-ignore */}
                                             {tier.originalPrice[frequency.value]}
                                         </div>

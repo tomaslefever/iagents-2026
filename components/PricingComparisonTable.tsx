@@ -6,46 +6,50 @@ const features = [
     {
         category: 'Core Capabilities',
         items: [
-            { name: 'Agentes de IA', starter: '2', growth: '3', enterprise: 'Ilimitados' },
-            { name: 'Conversaciones/mes', starter: '1,000', growth: '5,000', enterprise: 'Ilimitadas' },
-            { name: 'Memoria de contexto', starter: '14 días', growth: 'Persistente', enterprise: 'Persistente' },
-            { name: 'Entrenamiento automático', starter: false, growth: true, enterprise: true },
+            { name: 'Agentes de IA', starter: '2', growth: '3', voice: '1 (Voz)', enterprise: 'Ilimitados' },
+            { name: 'Conversaciones/mes', starter: '1,000', growth: '5,000', voice: '1,000 min', enterprise: 'Ilimitadas' },
+            { name: 'Memoria de contexto', starter: '14 días', growth: 'Persistente', voice: 'Persistente', enterprise: 'Persistente' },
+            { name: 'Entrenamiento automático', starter: false, growth: true, voice: true, enterprise: true },
         ]
     },
     {
         category: 'Canales',
         items: [
-            { name: 'Email Automation', starter: true, growth: true, enterprise: true },
-            { name: 'WhatsApp Business', starter: true, growth: true, enterprise: true },
-            { name: 'Voz / Telefonía', starter: true, growth: true, enterprise: true },
-            { name: 'SMS', starter: false, growth: 'Add-on', enterprise: true },
+            { name: 'Email Automation', starter: true, growth: true, voice: false, enterprise: true },
+            { name: 'WhatsApp Business', starter: true, growth: true, voice: false, enterprise: true },
+            { name: 'Voz / Telefonía', starter: false, growth: false, voice: true, enterprise: true },
+            { name: 'SMS', starter: false, growth: 'Add-on', voice: 'Add-on', enterprise: true },
         ]
     },
     {
         category: 'Integraciones',
         items: [
-            { name: 'CRM Básico (HubSpot, Pipedrive)', starter: true, growth: true, enterprise: true },
-            { name: 'Sincronización bidireccional', starter: false, growth: true, enterprise: true },
-            { name: 'API Access', starter: false, growth: true, enterprise: true },
-            { name: 'Custom Webhooks', starter: false, growth: false, enterprise: true },
-            { name: 'ERP Legacy (SAP, Oracle)', starter: false, growth: false, enterprise: true },
+            { name: 'CRM Básico (HubSpot, Pipedrive)', starter: true, growth: true, voice: true, enterprise: true },
+            { name: 'Sincronización bidireccional', starter: false, growth: true, voice: true, enterprise: true },
+            { name: 'API Access', starter: false, growth: true, voice: true, enterprise: true },
+            { name: 'Custom Webhooks', starter: false, growth: false, voice: true, enterprise: true },
+            { name: 'ERP Legacy (SAP, Oracle)', starter: false, growth: false, voice: false, enterprise: true },
         ]
     },
     {
         category: 'Soporte & Seguridad',
         items: [
-            { name: 'SLA de Uptime', starter: '99.0%', growth: '99.9%', enterprise: '99.99%' },
-            { name: 'Soporte', starter: 'Email', growth: 'Prioritario', enterprise: 'Ingeniero Dedicado' },
-            { name: 'SSO (Okta, Azure AD)', starter: false, growth: false, enterprise: true },
-            { name: 'On-premise Deployment', starter: false, growth: false, enterprise: true },
+            { name: 'SLA de Uptime', starter: '99.0%', growth: '99.9%', voice: '99.9%', enterprise: '99.99%' },
+            { name: 'Soporte', starter: 'Email', growth: 'Prioritario', voice: 'Prioritario', enterprise: 'Ingeniero Dedicado' },
+            { name: 'SSO (Okta, Azure AD)', starter: false, growth: false, voice: false, enterprise: true },
+            { name: 'On-premise Deployment', starter: false, growth: false, voice: false, enterprise: true },
         ]
     }
 ]
 
 export default function PricingComparisonTable({ frequency }: { frequency: { value: string } }) {
+    // Helper to catch potentially undefined properties if user hasn't fully updated types yet
+    // @ts-ignore
+    const getVal = (item: any, key: string) => item[key];
+
     return (
         <section className="py-24 relative">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="max-w-[90rem] mx-auto px-6 lg:px-8">
                 <div className="mb-16 text-center">
                     <h2 className="text-3xl font-medium text-white tracking-tight mb-4">
                         Comparativa detallada
@@ -58,9 +62,9 @@ export default function PricingComparisonTable({ frequency }: { frequency: { val
                 {/* Glow Effect */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-[600px] bg-indigo-500/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
 
-                <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/40 backdrop-blur-sm shadow-2xl">
+                <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/40 backdrop-blur-sm shadow-2xl overflow-x-auto">
                     {/* Header */}
-                    <div className="grid grid-cols-4 p-6 border-b border-white/10 bg-zinc-900/80 sticky top-0 z-20">
+                    <div className="grid grid-cols-5 p-6 border-b border-white/10 bg-zinc-900/80 sticky top-0 z-20 min-w-[800px]">
                         <div className="col-span-1 text-sm font-semibold text-zinc-500 uppercase tracking-wider flex items-end pb-2">
                             Features
                         </div>
@@ -74,15 +78,24 @@ export default function PricingComparisonTable({ frequency }: { frequency: { val
                             </p>
                         </div>
                         <div className="col-span-1 text-center relative">
-                            {/* Neon highlight for Growth */}
-                            <div className="absolute inset-x-4 -top-6 bottom-0 bg-indigo-500/10 rounded-t-xl z-0 pointer-events-none"></div>
+                            <h3 className="text-lg font-semibold text-indigo-400">Growth</h3>
+                            <p className="text-sm text-zinc-600 line-through decoration-zinc-600 text-[10px]">
+                                {frequency.value === 'monthly' ? '$390' : '$290'}
+                            </p>
+                            <p className="text-sm text-zinc-400 font-bold">
+                                {frequency.value === 'monthly' ? '$290' : '$230'}/mes
+                            </p>
+                        </div>
+                        <div className="col-span-1 text-center relative">
+                            {/* Neon highlight for Voice */}
+                            <div className="absolute inset-x-4 -top-6 bottom-0 bg-emerald-500/5 rounded-t-xl z-0 pointer-events-none"></div>
                             <div className="relative z-10">
-                                <h3 className="text-lg font-semibold text-indigo-400 drop-shadow-[0_0_10px_rgba(129,140,248,0.5)]">Growth</h3>
+                                <h3 className="text-lg font-semibold text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]">Voice</h3>
                                 <p className="text-sm text-zinc-600 line-through decoration-zinc-600 text-[10px]">
-                                    {frequency.value === 'monthly' ? '$390' : '$290'}
+                                    {frequency.value === 'monthly' ? '$490' : '$390'}
                                 </p>
                                 <p className="text-sm text-zinc-400 font-bold">
-                                    {frequency.value === 'monthly' ? '$290' : '$230'}/mes
+                                    {frequency.value === 'monthly' ? '$390' : '$312'}/mes
                                 </p>
                             </div>
                         </div>
@@ -93,7 +106,7 @@ export default function PricingComparisonTable({ frequency }: { frequency: { val
                     </div>
 
                     {/* Body */}
-                    <div className="divide-y divide-white/5">
+                    <div className="divide-y divide-white/5 min-w-[800px]">
                         {features.map((section, sIdx) => (
                             <div key={sIdx}>
                                 {/* Section Header */}
@@ -107,7 +120,7 @@ export default function PricingComparisonTable({ frequency }: { frequency: { val
                                 {section.items.map((item, iIdx) => (
                                     <div
                                         key={iIdx}
-                                        className="grid grid-cols-4 items-center p-4 hover:bg-white/5 transition-colors group"
+                                        className="grid grid-cols-5 items-center p-4 hover:bg-white/5 transition-colors group"
                                     >
                                         <div className="col-span-1 pl-2 text-sm text-zinc-300 font-medium flex items-center gap-2">
                                             {item.name}
@@ -116,19 +129,23 @@ export default function PricingComparisonTable({ frequency }: { frequency: { val
 
                                         {/* Starter Value */}
                                         <div className="col-span-1 text-center text-sm text-zinc-400 flex justify-center">
-                                            {renderValue(item.starter)}
+                                            {renderValue(getVal(item, 'starter'))}
                                         </div>
 
                                         {/* Growth Value */}
+                                        <div className="col-span-1 text-center text-sm text-zinc-300 flex justify-center">
+                                            {renderValue(getVal(item, 'growth'))}
+                                        </div>
+
+                                        {/* Voice Value */}
                                         <div className="col-span-1 text-center text-sm text-white font-medium flex justify-center relative">
-                                            {/* Subtle column highlight */}
-                                            <div className="absolute inset-y-[-16px] inset-x-4 bg-indigo-500/5 z-0 pointer-events-none group-hover:bg-indigo-500/10 transition-colors"></div>
-                                            <span className="relative z-10">{renderValue(item.growth)}</span>
+                                            <div className="absolute inset-y-[-16px] inset-x-4 bg-emerald-500/5 z-0 pointer-events-none group-hover:bg-emerald-500/10 transition-colors"></div>
+                                            <span className="relative z-10">{renderValue(getVal(item, 'voice'))}</span>
                                         </div>
 
                                         {/* Enterprise Value */}
                                         <div className="col-span-1 text-center text-sm text-zinc-400 flex justify-center">
-                                            {renderValue(item.enterprise)}
+                                            {renderValue(getVal(item, 'enterprise'))}
                                         </div>
                                     </div>
                                 ))}

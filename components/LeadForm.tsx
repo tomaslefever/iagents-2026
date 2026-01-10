@@ -314,16 +314,13 @@ export default function LeadForm() {
               </div>
               <h3 className="text-white font-semibold text-xl mb-3">{confirmationTitle}</h3>
               <p className="text-zinc-400 text-sm mb-8">{confirmationMessage}</p>
-              <div className="flex gap-3 w-full">
+              <div className="w-full">
                 <button
-                  onClick={handleReset}
-                  className="flex-1 py-3.5 rounded-xl border border-white/10 text-zinc-300 text-sm font-medium hover:bg-white/5 transition-colors"
-                >
-                  Probar de nuevo
-                </button>
-                <button
-                  onClick={closeModal}
-                  className="flex-1 bg-white text-zinc-950 font-bold py-3.5 rounded-xl hover:bg-zinc-200 transition-all text-sm flex items-center justify-center gap-2 shadow-lg shadow-white/5"
+                  onClick={() => {
+                    closeModal()
+                    setTimeout(handleReset, 300)
+                  }}
+                  className="w-full bg-white text-zinc-950 font-bold py-3.5 rounded-xl hover:bg-zinc-200 transition-all text-sm flex items-center justify-center gap-2 shadow-lg shadow-white/5"
                 >
                   Entendido
                 </button>
